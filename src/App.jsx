@@ -16,56 +16,56 @@ const STORYTELLING_ITEMS_BY_TYPE = {
   general: [
     {
       title: 'Thông điệp chính của ảnh',
-      summary: 'Ảnh phải có một ý chính rõ ràng trước khi đi vào chi tiết.',
-      lookAt: 'Nhìn tổng thể ảnh và tự hỏi: ảnh này đang bán điều gì — kiến trúc, lifestyle, sự riêng tư, cảnh quan, ánh sáng, tiện ích hay cảm giác cao cấp?',
-      cue: 'Một ảnh tốt thường chỉ có một thông điệp chính. Nếu ảnh cố nói quá nhiều thứ cùng lúc, người xem sẽ không nhớ gì rõ ràng.',
-      common: 'Ảnh có nhiều chi tiết đẹp nhưng không có trọng tâm; artist chăm cây, xe, người, texture nhưng công trình chính không nổi; mood và camera không phục vụ cùng một ý.',
-      fix: 'Viết một câu ngắn cho ảnh: "Ảnh này bán ___". Sau đó giảm hoặc làm mềm những yếu tố không phục vụ câu này. Dùng framing, lighting, contrast và crop để đẩy thông điệp chính lên.',
+      summary: 'Mỗi ảnh phải có một ý chính rõ ràng trước khi đi vào chi tiết.',
+      lookAt: 'Nhìn tổng thể ảnh và tự hỏi: ảnh này đang bán điều gì — kiến trúc, lifestyle (cách sống), sự riêng tư, cảnh quan, ánh sáng, tiện ích hay cảm giác cao cấp?',
+      cue: 'Một ảnh tốt thường chỉ tập trung vào một thông điệp chính. Nếu ảnh muốn nói quá nhiều thứ cùng lúc, người xem sẽ không nhớ rõ điều gì.',
+      common: 'Ảnh có nhiều chi tiết đẹp nhưng không có trọng tâm; artist chăm cây, xe, người, texture nhưng công trình chính không nổi; mood (cảm xúc tổng thể) và camera không phục vụ cùng một ý.',
+      fix: 'Tự viết một câu ngắn cho ảnh: "Ảnh này bán ___". Sau đó giảm hoặc làm mềm những yếu tố không phục vụ câu này. Dùng framing (cách dựng khung hình), ánh sáng, contrast (tương phản sáng tối) và crop (cắt khung) để đẩy thông điệp chính lên.',
       selfCheck: 'Nếu phải đặt tên cho ảnh này bằng 5 từ, bạn sẽ đặt là gì?',
     },
     {
-      title: 'Hero element có đủ mạnh không',
-      summary: 'Hero phải là thứ người xem nhìn thấy và nhớ đầu tiên.',
-      lookAt: 'Xác định hero chính: facade, entrance, balcony, courtyard, pool, lobby, skyline, public plaza, landscape axis hoặc một khoảnh khắc lifestyle.',
-      cue: 'Hero không nhất thiết phải nằm giữa ảnh, nhưng phải có lực hút thị giác mạnh nhất. Khi nheo mắt, hero vẫn phải đọc được.',
-      common: 'Hero bị cây che, bị xe/người tranh attention, chìm trong shadow, quá nhỏ trong frame, hoặc không có contrast đủ mạnh so với xung quanh.',
-      fix: 'Tăng priority cho hero bằng light, contrast, crop, camera angle, depth of field nhẹ, giảm saturation/contrast vùng phụ hoặc reposition entourage.',
+      title: 'Hero (điểm chính cần khoe) có đủ mạnh không',
+      summary: 'Hero phải là thứ người xem nhìn thấy đầu tiên trong 3 giây đầu.',
+      lookAt: 'Xác định hero (điểm chính cần khoe) của ảnh: facade, entrance (lối vào), balcony, courtyard (sân trong), pool, lobby, skyline, public plaza hoặc một khoảnh khắc lifestyle.',
+      cue: 'Hero không nhất thiết phải nằm giữa ảnh, nhưng phải có lực hút thị giác mạnh nhất. Khi nheo mắt nhìn ảnh, hero vẫn phải đọc được rõ ràng.',
+      common: 'Hero bị cây che, bị xe / người tranh sự chú ý, chìm trong shadow (vùng tối), quá nhỏ trong frame, hoặc không có contrast đủ mạnh so với xung quanh.',
+      fix: 'Tăng độ ưu tiên cho hero bằng ánh sáng, contrast, crop, camera angle, depth of field nhẹ (làm mờ vùng phụ), giảm saturation (độ bão hòa màu) / contrast vùng phụ, hoặc dời người và xe ra chỗ khác.',
       selfCheck: 'Khi nheo mắt, hero có còn là điểm sáng / contrast cao nhất không?',
     },
     {
       title: 'Chính / phụ / nền có rõ không',
-      summary: 'Ảnh cần lớp chính, lớp hỗ trợ và nền — không phải mọi thứ quan trọng ngang nhau.',
-      lookAt: 'Phân ảnh thành 3 lớp: Chính (thứ cần bán), Phụ (yếu tố hỗ trợ câu chuyện), Nền (bối cảnh tạo không khí).',
-      cue: 'Nếu foreground, cây, sky, xe, người và công trình đều đòi attention như nhau, ảnh sẽ bị ồn. Visual hierarchy tốt nghĩa là vùng phụ biết lùi xuống.',
-      common: 'Foreground quá nặng, sky quá đẹp nhưng lấn công trình, entourage quá nổi, cây xanh quá bão hòa, background quá sáng hoặc quá nhiều contrast.',
-      fix: 'Giảm contrast / saturation / sharpness của vùng phụ. Tăng light hoặc clarity cho hero. Dùng crop và framing để loại bớt vùng không phục vụ ảnh.',
+      summary: 'Ảnh cần lớp chính, lớp hỗ trợ và lớp nền — không phải mọi thứ quan trọng ngang nhau.',
+      lookAt: 'Chia ảnh thành 3 lớp: lớp chính (thứ cần bán), lớp phụ (yếu tố hỗ trợ câu chuyện), lớp nền (bối cảnh tạo không khí).',
+      cue: 'Nếu foreground (lớp phía trước), cây, sky, xe, người và công trình đều đòi sự chú ý như nhau, ảnh sẽ bị ồn. Visual hierarchy (thứ tự chính phụ) tốt nghĩa là vùng phụ biết lùi xuống.',
+      common: 'Foreground quá nặng, sky quá đẹp nhưng lấn công trình, entourage (người, xe, cây) quá nổi, cây xanh quá bão hòa màu, background (lớp nền) quá sáng hoặc quá nhiều contrast.',
+      fix: 'Giảm contrast / saturation / sharpness của vùng phụ. Tăng ánh sáng hoặc độ rõ cho hero. Dùng crop và framing để loại bớt vùng không phục vụ ảnh.',
       selfCheck: 'Bạn có chỉ ra được rõ 3 lớp: chính, phụ, gây nhiễu không?',
     },
     {
       title: 'Đường dẫn mắt người xem',
       summary: 'Mắt người xem cần được dẫn vào hero một cách tự nhiên.',
       lookAt: 'Theo dõi mắt bạn đi qua ảnh: điểm đầu tiên nhìn vào là đâu, sau đó đi đâu, có quay lại hero không hay bị kéo ra ngoài frame?',
-      cue: 'Ảnh mạnh thường có visual flow: foreground dẫn vào midground, ánh sáng dẫn vào hero, line kiến trúc dẫn vào focal point.',
-      common: 'Mắt bị kéo vào góc ảnh, đường dẫn bị cây/xe chặn, vật sáng nằm sai chỗ, người xem nhìn sky hoặc foreground nhiều hơn công trình.',
-      fix: 'Dùng leading lines, shadow, brightness, contrast, scale người/xe, hướng nhìn nhân vật, opening trong cây hoặc crop để dẫn mắt về hero.',
+      cue: 'Ảnh mạnh thường có visual flow (dòng mắt): foreground dẫn vào midground (lớp giữa), ánh sáng dẫn vào hero, đường line kiến trúc dẫn vào focal point (điểm tụ thị giác).',
+      common: 'Mắt bị kéo vào góc ảnh, đường dẫn bị cây / xe chặn, vật sáng nằm sai chỗ, người xem nhìn sky hoặc foreground nhiều hơn công trình.',
+      fix: 'Dùng leading lines (đường dẫn mắt), shadow, brightness, contrast, scale của người / xe, hướng nhìn nhân vật, opening trong cây, hoặc crop để dẫn mắt về hero.',
       selfCheck: 'Mắt bạn lượn theo trình tự nào trong ảnh — và cuối cùng dừng ở đâu?',
     },
     {
       title: 'Chi tiết có đang phục vụ câu chuyện không',
       summary: 'Chi tiết đẹp chỉ có giá trị khi nó giúp ảnh mạnh hơn.',
-      lookAt: 'Kiểm tra các chi tiết như cây, xe, người, furniture, props, material detail, reflection, sky, birds, lights. Mỗi thứ có đang hỗ trợ câu chuyện không?',
-      cue: 'Junior artist hay bị "detail trap": càng sửa nhiều chi tiết nhỏ, ảnh càng rối nếu direction chính chưa rõ.',
-      common: 'Thêm người/xe cho đầy nhưng không có mục đích; cây che kiến trúc; reflection quá nổi; material chi tiết nhưng không ai nhìn vào hero.',
-      fix: 'Xóa hoặc làm mềm chi tiết không cần thiết. Chỉ giữ những yếu tố giúp scale, lifestyle, depth, mood hoặc storytelling.',
+      lookAt: 'Kiểm tra các chi tiết như cây, xe, người, furniture, props (đồ trang trí), material detail, reflection, sky, chim, đèn. Mỗi thứ có đang hỗ trợ câu chuyện không?',
+      cue: 'Junior artist hay bị "detail trap" (mải sửa chi tiết nhỏ): càng sửa nhiều chi tiết nhỏ, ảnh càng rối nếu hướng đi chính chưa rõ.',
+      common: 'Thêm người / xe cho đầy nhưng không có mục đích; cây che kiến trúc; reflection quá nổi; material chi tiết nhưng không ai nhìn vào hero.',
+      fix: 'Xóa hoặc làm mềm chi tiết không cần thiết. Chỉ giữ những yếu tố giúp scale (tỉ lệ), lifestyle, depth (chiều sâu), mood hoặc storytelling.',
       selfCheck: 'Nếu xóa 20% chi tiết phụ, ảnh có mạnh hơn hay yếu đi?',
     },
     {
       title: 'Mood có thống nhất không',
-      summary: 'Camera, lighting, material, entourage và color grading phải cùng phục vụ một mood.',
-      lookAt: 'Đánh giá cảm xúc tổng thể: premium, calm, resort, urban, vibrant, family, cinematic, private, public, commercial hoặc institutional.',
-      cue: 'Mood tốt không đến từ một yếu tố riêng lẻ. Nó là kết quả của time of day, sky, lighting, material, activity, camera và post cùng nói một ngôn ngữ.',
-      common: 'Ánh sáng luxury nhưng entourage quá casual; sky dramatic nhưng project cần calm; color grading lạnh nhưng material muốn warm; activity không khớp loại công trình.',
-      fix: 'Chọn mood chính trước. Sau đó cân lại sky, time of day, light direction, saturation, contrast, entourage và color grading để mọi thứ đi cùng nhau.',
+      summary: 'Camera, ánh sáng, material, entourage và color grading phải cùng phục vụ một mood.',
+      lookAt: 'Đánh giá cảm xúc tổng thể: premium, calm (yên bình), resort, urban (đô thị), vibrant (sống động), family, cinematic, private, public, commercial hoặc institutional.',
+      cue: 'Mood tốt không đến từ một yếu tố riêng lẻ. Nó là kết quả của time of day (thời gian trong ngày), sky, ánh sáng, material, activity, camera và post (hậu kỳ) cùng nói một ngôn ngữ.',
+      common: 'Ánh sáng luxury nhưng entourage quá casual; sky dramatic nhưng project cần calm; color grading lạnh nhưng material muốn ấm; activity không khớp loại công trình.',
+      fix: 'Chọn mood chính trước. Sau đó cân lại sky, time of day, hướng ánh sáng, saturation, contrast, entourage và color grading (chỉnh màu tổng thể) để mọi thứ đi cùng nhau.',
       selfCheck: 'Nếu mỗi yếu tố đang nói một mood khác nhau, mood "chính" của ảnh là gì?',
     },
   ],
@@ -299,12 +299,60 @@ const PHASES = [
       { id: 'spiral', label: 'Golden Spiral', kind: 'composition' },
     ],
     items: [
-      { title: 'Góc camera khớp hướng đã duyệt', lookAt: 'So sánh góc render với reference, moodboard hoặc still đã được duyệt.', cue: 'Đứng lùi khỏi màn hình. Công trình đọc ngay từ ánh nhìn đầu có giống lúc duyệt brief không?', common: 'Camera lệch trục, lens quá rộng làm bóp công trình, vantage point khác hướng đã duyệt.', fix: 'Reset focal length và target về setup đã duyệt. Lock camera sau khi xác nhận.' },
-      { title: 'Bố cục cân bằng', lookAt: 'Phân bố trọng lượng giữa foreground, mass công trình, sky và entourage.', cue: 'Hình dung nghiêng ảnh — có quadrant nào tự nhiên thấy trống hoặc nặng không?', common: 'Sky chiếm quá nhiều, horizon lệch, hero element bị đẩy ra góc, foreground trống.', fix: 'Re-frame, chỉnh crop, thêm foreground anchor hoặc đổi vantage để cân lại trọng lượng.' },
-      { title: 'Đường thẳng đứng được kiểm soát', lookAt: 'Các cạnh đứng của công trình — cột, mullion, parapet, góc nhà.', cue: 'Đường vertical kiến trúc phải thẳng trừ khi méo có chủ đích. Kiểm tra song song với khung hình.', common: 'Vertical bị hội tụ (keystoning), tilt-shift sai, two-point perspective vỡ.', fix: 'Bật two-point perspective trên camera, dùng tilt-shift correction, hoặc fix trong post.' },
-      { title: 'Focal length tự nhiên', lookAt: 'Compression của perspective — công trình có bị méo hoặc kéo dài không?', cue: 'Ống 24mm dễ làm cảm giác cường điệu; 28–50mm thường gần với architectural photography.', common: 'Cảm giác fisheye với 14–18mm, view xa thiếu compression, méo ở cạnh ảnh.', fix: 'Tăng focal length lên 28–50mm equivalent, hoặc lùi camera và re-frame.' },
-      { title: 'Element thiết kế chính nhìn rõ', lookAt: 'Xác định hero của project — entry, facade signature, material story — và check xem có đọc được không.', cue: 'Nheo mắt nhìn ảnh. Hero vẫn phải là điểm bắt mắt khi chi tiết bị giảm.', common: 'Hero bị che bởi entourage, bị cây chắn, bị sky background nuốt mất.', fix: 'Reposition entourage, bỏ bớt cây, thêm rim light hướng, hoặc recompose để lộ hero.' },
-      { title: 'Foreground, midground, background đọc rõ', lookAt: 'Layering chiều sâu — separation về tone, color hoặc detail giữa các depth plane.', cue: 'Che 1/3 ảnh từng phần. Mỗi layer vẫn phải đọc được riêng biệt.', common: 'Depth phẳng, các layer hòa vào một tone, thiếu atmospheric perspective, không có foreground anchor.', fix: 'Thêm haze, tăng value contrast giữa các layer, đặt thêm element foreground.' },
+      {
+        title: 'Góc camera khớp hướng đã duyệt',
+        summary: 'Camera phải đặt đúng vị trí và đúng hướng đã duyệt với client.',
+        lookAt: 'So sánh góc render với reference, moodboard hoặc still đã được duyệt từ trước.',
+        cue: 'Đứng lùi khỏi màn hình. Công trình đọc ngay từ ánh nhìn đầu có giống lúc duyệt brief không?',
+        common: 'Camera lệch trục, lens quá rộng làm bóp méo công trình, vantage point (vị trí đặt camera) khác với hướng đã duyệt.',
+        fix: 'Đưa camera về đúng setup đã duyệt: focal length (độ rộng / hẹp của ống kính) và target (điểm camera nhìn vào) không nên tự ý đổi nếu chưa có lý do. Lock camera sau khi đã xác nhận.',
+        selfCheck: 'Nếu mở reference đã duyệt cạnh ảnh hiện tại, hai cái có khớp về angle và proportion không?',
+      },
+      {
+        title: 'Bố cục cân bằng',
+        summary: 'Trọng lượng thị giác phải cân giữa các vùng trong khung hình.',
+        lookAt: 'Xem cách phân bố trọng lượng giữa foreground (lớp phía trước), khối công trình, sky và entourage (người, xe, cây).',
+        cue: 'Hình dung nghiêng ảnh — có góc nào tự nhiên thấy trống hoặc nặng không?',
+        common: 'Sky chiếm quá nhiều, đường horizon (chân trời) lệch, hero bị đẩy ra góc, foreground trống không có gì đỡ.',
+        fix: 'Dựng khung hình lại, chỉnh crop (cắt khung), thêm foreground anchor (vật ở phía trước để neo bố cục) hoặc đổi vantage point để cân lại trọng lượng.',
+        selfCheck: 'Nếu chia ảnh thành 4 góc đều nhau, có góc nào quá nặng hoặc quá trống so với phần còn lại không?',
+      },
+      {
+        title: 'Đường thẳng đứng được kiểm soát',
+        summary: 'Các đường vertical (thẳng đứng) của kiến trúc phải đứng thẳng, không nghiêng.',
+        lookAt: 'Các cạnh đứng của công trình — cột, mullion (thanh chia kính), parapet (lan can mái), góc nhà.',
+        cue: 'Đường vertical kiến trúc phải song song với mép khung hình, trừ khi méo có chủ đích.',
+        common: 'Vertical bị hội tụ về đỉnh (keystoning), tilt-shift (chỉnh perspective trong camera) sai, two-point perspective (camera 2 điểm tụ) bị vỡ.',
+        fix: 'Bật two-point perspective trên camera, hoặc dùng tilt-shift correction trong post (chỉnh sau render). Nếu vertical vẫn nghiêng, fix bằng warp / transform.',
+        selfCheck: 'Đặt thước thẳng đứng cạnh màn hình — các cột công trình có song song với thước không?',
+      },
+      {
+        title: 'Focal length tự nhiên',
+        summary: 'Focal length (độ rộng / hẹp của ống kính) phải cho cảm giác tự nhiên, không méo.',
+        lookAt: 'Cảm giác phối cảnh — công trình có bị méo, kéo dài hoặc phình to bất thường không?',
+        cue: 'Ống 24mm dễ làm cảm giác cường điệu; 28–50mm equivalent thường gần với cách kiến trúc sư chụp ảnh thật.',
+        common: 'Cảm giác fisheye (ống mắt cá quá rộng) với 14–18mm, view xa thiếu compression (nén phối cảnh), méo ở cạnh ảnh.',
+        fix: 'Tăng focal length lên 28–50mm equivalent, hoặc lùi camera ra xa và dựng khung hình lại.',
+        selfCheck: 'Nếu tưởng tượng đứng tại vị trí camera ngoài đời, mắt mình có thấy công trình giống thế này không?',
+      },
+      {
+        title: 'Hero (điểm chính cần khoe) đọc rõ',
+        summary: 'Hero — entry, facade signature, material story — phải nổi lên trước cây, xe, người và sky.',
+        lookAt: 'Xác định hero của project: entry (lối vào), facade signature (mặt tiền đặc trưng) hay material story (câu chuyện vật liệu). Sau đó kiểm tra hero có đọc rõ trong ảnh không.',
+        cue: 'Nheo mắt hoặc thu nhỏ ảnh: hero có còn là điểm bắt mắt nhất khi chi tiết bị mờ đi không?',
+        common: 'Hero bị entourage (người, xe, cây) che; bị sky lấn vì thiếu contrast (tương phản sáng tối); hoặc bị foreground (lớp phía trước) nuốt mất.',
+        fix: 'Dời entourage, bỏ bớt cây, thêm rim light (ánh sáng viền) cho hero, hoặc dựng lại khung hình để lộ hero.',
+        selfCheck: 'Nếu in ảnh ở kích thước nhỏ bằng bao thuốc, hero có còn nhận ra được không?',
+      },
+      {
+        title: 'Foreground, midground, background đọc rõ',
+        summary: 'Ba lớp chiều sâu — foreground, midground, background — phải tách lớp rõ.',
+        lookAt: 'Phân tách chiều sâu — separation về tone (sắc độ), color hoặc detail giữa foreground (lớp trước), midground (lớp giữa), background (lớp nền).',
+        cue: 'Che 1/3 ảnh từng phần. Mỗi layer vẫn phải đọc được riêng biệt khi nhìn riêng.',
+        common: 'Depth phẳng, các layer hòa vào một tone, thiếu atmospheric perspective (mờ dần theo chiều xa), không có foreground anchor.',
+        fix: 'Thêm haze (sương / mờ khoảng cách) cho background, tăng value contrast (tương phản sáng tối) giữa các layer, đặt thêm element foreground.',
+        selfCheck: 'Nếu chỉ giữ 1 layer (foreground / midground / background), layer đó có còn đứng vững không?',
+      },
     ],
   },
   {
@@ -321,12 +369,60 @@ const PHASES = [
       { id: 'warm-cool', label: 'Warm / Cool Balance', kind: 'hint', hint: 'Sky vs ánh sáng nội thất vs sunlight — temperature phải support mood, không chống lại.' },
     ],
     items: [
-      { title: 'Material chính khớp reference', lookAt: 'Từng surface chính so với material spec hoặc reference đã duyệt.', cue: 'Đi qua ảnh từng surface một. Dừng ở chỗ không khớp brief và tự hỏi vì sao.', common: 'Tone gỗ sai, concrete generic thay vì polished, thiếu variation, sai loại đá.', fix: 'Đổi từ material library đã duyệt, chỉnh albedo, mở reference và tune lại.' },
-      { title: 'Texture scale & mapping', lookAt: 'Các bề mặt lớn — sàn, đá, gỗ, facade panel, vải, tường.', cue: 'Tự hỏi texture có còn believable nếu có người 1.7m đứng cạnh không. Sai scale và stretched UV nhìn ra ngay.', common: 'Vân gỗ quá to, đá quá nhỏ, UV bị stretch, seam lộ, lặp tiling.', fix: 'Chỉnh UVW scale, rotation, randomization, dùng triplanar mapping, hoặc thay texture chất lượng cao hơn.' },
-      { title: 'Không bị tiling hoặc stretching lộ rõ', lookAt: 'Bề mặt phẳng lặp lại — pavement, panel facade lớn, trần, tường.', cue: 'Pattern không nên hút mắt. Nếu mình nhìn ra repeat, client cũng sẽ nhìn ra.', common: 'Lặp motif rõ, mirrored seam, UV stretch ở góc, banding.', fix: 'Tăng resolution texture, randomize UV offset/rotation từng element, dùng procedural variation.' },
-      { title: 'Hướng ánh sáng phù hợp với scene', lookAt: 'Sun azimuth và elevation, key vs fill, hướng shadow toàn scene.', cue: 'Trace một shadow ngược về source. Source đó có nhất quán với mọi shadow khác không?', common: 'Shadow conflict hướng, sun quá đỉnh đầu hoặc quá flat, fill light giết depth.', fix: 'Đổi giờ sun, cân lại fill/ambient, thêm rim hoặc back light để lộ form công trình.' },
-      { title: 'Exposure & contrast cân bằng', lookAt: 'Pixel tối nhất và sáng nhất. Highlight không nên bị blown, shadow không nên bị crushed.', cue: 'Nheo mắt. Có vùng trắng pure hoặc đen pure đang nuốt detail mà mình muốn giữ không?', common: 'Highlight clip ở kính/sky, shadow detail bị crushed, midtone phẳng, contrast thấp.', fix: 'Chỉnh exposure, tone-mapping curve, raise shadows, recover highlights trong post.' },
-      { title: 'Reflection & roughness chân thật', lookAt: 'Kính, sàn polish, panel kim loại, mặt nước.', cue: 'Reflection phải khớp với object xung quanh về vị trí và độ mềm. Bề mặt rough phải tán sáng, không soi gương.', common: 'Concrete bị mirror-glossy, reflection lệch khỏi environment, blurry chỗ phải sharp.', fix: 'Tune roughness map, fix reflection environment, verify IOR, tăng reflection samples.' },
+      {
+        title: 'Material chính khớp reference',
+        summary: 'Material trong ảnh phải khớp đúng reference đã duyệt.',
+        lookAt: 'Từng surface chính (sàn, tường, mái, kính, kim loại) so với material spec hoặc reference đã duyệt.',
+        cue: 'Đi qua ảnh từng surface một. Dừng ở chỗ không khớp brief và tự hỏi vì sao.',
+        common: 'Tone gỗ sai, concrete generic thay vì polished, thiếu variation, sai loại đá.',
+        fix: 'Đổi từ material library đã duyệt, chỉnh albedo (màu gốc của material), mở reference và tinh chỉnh lại.',
+        selfCheck: 'Nếu đặt swatch material đã duyệt cạnh ảnh, có khớp tone và texture không?',
+      },
+      {
+        title: 'Texture scale & mapping',
+        summary: 'Texture (vân vật liệu) và UVW mapping (cách texture bám lên model) phải đúng tỉ lệ thực tế.',
+        lookAt: 'Các bề mặt lớn — sàn, đá, gỗ, facade panel, vải, tường.',
+        cue: 'Tự hỏi texture có còn believable nếu có người 1.7m đứng cạnh không. Sai scale và stretched UV (texture bị kéo giãn) nhìn ra ngay.',
+        common: 'Vân gỗ quá to, đá quá nhỏ, UV bị stretch (kéo giãn), seam (đường nối) lộ rõ, lặp tiling.',
+        fix: 'Chỉnh UVW scale, rotation (xoay UV), randomization (làm ngẫu nhiên), dùng triplanar mapping (texture 3 trục), hoặc thay texture chất lượng cao hơn.',
+        selfCheck: 'Nếu tưởng tượng đặt một viên gạch / một thớ gỗ thật cạnh material trong ảnh, kích thước có khớp không?',
+      },
+      {
+        title: 'Không bị tiling hoặc stretching lộ rõ',
+        summary: 'Bề mặt lặp lại không nên để lộ pattern.',
+        lookAt: 'Bề mặt phẳng lặp lại — pavement (lát đường), panel facade lớn, trần, tường.',
+        cue: 'Pattern không nên hút mắt. Nếu mình nhìn ra sự lặp lại, client cũng sẽ nhìn ra.',
+        common: 'Lặp motif rõ, mirrored seam (đường nối đối xứng), UV stretch ở góc, banding.',
+        fix: 'Tăng resolution texture, randomize UV offset / rotation từng element, dùng procedural variation (biến tấu programmatic).',
+        selfCheck: 'Nhìn lướt qua các surface lớn — có vùng nào pattern lặp đập vào mắt không?',
+      },
+      {
+        title: 'Hướng ánh sáng phù hợp với scene',
+        summary: 'Hướng ánh sáng phải nhất quán và làm rõ kiến trúc.',
+        lookAt: 'Sun azimuth (góc xoay theo phương ngang) và elevation (góc cao của mặt trời), key light (đèn chính) vs fill (đèn phụ), hướng shadow (bóng đổ) toàn scene.',
+        cue: 'Trace một shadow ngược về nguồn sáng. Nguồn đó có nhất quán với mọi shadow khác không?',
+        common: 'Shadow conflict hướng (bóng đổ ngược nhau), sun quá đỉnh đầu hoặc quá flat, fill light quá mạnh giết depth (chiều sâu).',
+        fix: 'Đổi giờ sun, cân lại fill / ambient (đèn nền), thêm rim light (ánh viền) hoặc back light (đèn ngược) để lộ form công trình.',
+        selfCheck: 'Nếu bạn đặt một viên đá trên sàn, bóng của nó sẽ đổ về hướng nào — có khớp với các shadow trong ảnh không?',
+      },
+      {
+        title: 'Exposure & contrast cân bằng',
+        summary: 'Exposure (độ sáng tổng thể) không bị clip và contrast (tương phản) đủ depth.',
+        lookAt: 'Pixel tối nhất và sáng nhất. Highlight (vùng sáng mạnh) không nên bị blown (cháy trắng), shadow (vùng tối) không nên bị crushed (đen kịt).',
+        cue: 'Nheo mắt. Có vùng trắng pure hoặc đen pure đang nuốt detail mà mình muốn giữ không?',
+        common: 'Highlight clip ở kính / sky, shadow detail bị crushed (mất chi tiết), midtone phẳng, contrast thấp.',
+        fix: 'Chỉnh exposure, tone-mapping curve, raise shadows (kéo vùng tối lên), recover highlights (kéo vùng sáng xuống) trong post.',
+        selfCheck: 'Có vùng nào đáng lẽ thấy chi tiết nhưng giờ chỉ thấy trắng hoặc đen không?',
+      },
+      {
+        title: 'Reflection & roughness chân thật',
+        summary: 'Reflection (phản chiếu) và roughness (độ nhám / bóng) phải đúng cảm giác thực tế.',
+        lookAt: 'Kính, sàn polish, panel kim loại, mặt nước.',
+        cue: 'Reflection phải khớp với object xung quanh về vị trí và độ mềm. Bề mặt rough (nhám) phải tán sáng, không soi gương.',
+        common: 'Concrete bị mirror-glossy (bóng như gương), reflection lệch khỏi environment, blurry chỗ phải sharp.',
+        fix: 'Tune roughness map (bản đồ độ nhám), fix reflection environment (môi trường phản chiếu), verify IOR (chỉ số khúc xạ ánh sáng), tăng reflection samples.',
+        selfCheck: 'Nếu chạm thử bề mặt đó ngoài đời, cảm giác có giống ảnh không (nhẵn / nhám / bóng)?',
+      },
     ],
   },
   {
@@ -371,89 +467,556 @@ const PHASES = [
       { title: 'Border, crop & safe area', lookAt: 'Bốn cạnh và bốn góc ảnh. Aspect ratio khớp với spec deliverable.', cue: 'Element bị clip ở cạnh sẽ làm viewer phân tâm ngay.', common: 'Người hoặc object bị crop ở cạnh, sky quá cao, công trình bị cắt, sai aspect ratio.', fix: 'Re-crop, extend canvas bằng paint, hoặc render lại đúng aspect ratio.' },
       { title: 'Comment client đã xử lý', lookAt: 'Markup hoặc note review mới nhất từ client. Đi qua từng comment và verify đã giải quyết.', cue: 'Đừng tin trí nhớ — mở file markup. Comment chưa xử lý sẽ quay lại thành revision round.', common: 'Comment chỉ xử lý một phần, fix nhầm view, đọc nhầm comment.', fix: 'Tick từng comment trong tài liệu review, screenshot before/after để confirm.' },
       { title: 'Export hygiene (file, format, profile, resolution)', lookAt: 'Filename, format, color profile, resolution so với spec deliverable.', cue: 'Đây là cổng cuối trước khi gửi. Sai filename hoặc sRGB-vs-Adobe RGB sẽ bị client bắt.', common: 'Sai filename, JPG khi yêu cầu TIFF, thiếu color profile, sai resolution, embedded preview chất lượng thấp.', fix: 'Rename theo spec, re-export đúng format và profile, double-check brief.' },
+      {
+        title: 'Tone, white balance & độ căng ảnh',
+        summary: 'Cân lại nền tone cho sạch trước khi chỉnh màu sáng tạo. Ảnh phải có lực mà không bị gắt.',
+        lookAt: 'Nhìn vùng trắng (tường, trần, đá sáng), highlight (vùng sáng mạnh), shadow (vùng tối), midtone (vùng sáng trung bình) của công trình. Sau đó kiểm tra sự hòa hợp màu giữa sky, landscape, kiến trúc và ánh sáng nội thất.',
+        cue: 'Ảnh "căng" không có nghĩa là kéo contrast (độ tương phản) thật mạnh. Ảnh căng là khi vùng sáng sạch, vùng tối có chiều sâu, midtone rõ và công trình chính nổi lên mà vẫn giữ được detail.',
+        common: 'Ám vàng / xanh / magenta; tường trắng bị bẩn màu; shadow bệt mất chi tiết; highlight cháy trắng; ảnh flat (phẳng); contrast quá gắt; clarity / sharpen (làm nét) tạo halo (viền sáng giả).',
+        fix: 'Cân white balance (cân bằng trắng), chỉnh levels / curves nhẹ, kiểm soát highlight, đặt lại black point (điểm đen) vừa đủ, tăng midtone contrast ở vùng chính. Tránh kéo contrast toàn ảnh quá mạnh.',
+        selfCheck: 'Khi thu nhỏ ảnh, vùng trắng có còn cảm giác sạch và công trình có bật ra không?',
+      },
     ],
   },
 ]
 
-const LENSES = [
-  {
-    id: 'story', label: 'Story', abbr: 'S', title: 'Story Lens',
-    purpose: 'Kiểm tra ảnh có kể đúng câu chuyện và bán đúng giá trị chính của project không.',
-    questions: [
-      'Ảnh này đang bán điều gì: kiến trúc, lifestyle, privacy, landscape, ánh sáng hay trải nghiệm?',
-      'Hero element có rõ trong 3 giây đầu không?',
-      'Mood có đúng với loại hình công trình không?',
-      'Nhân vật, xe, cây và bối cảnh có hỗ trợ câu chuyện không?',
-      'Nếu bỏ hết checklist kỹ thuật, ảnh này đã có cảm xúc chưa?',
-    ],
+// Phase-specific Senior Review Lenses. Lens IDs are unique within a phase only;
+// scores and active selection are namespaced by phase, so collisions across phases are safe.
+const LENSES_BY_PHASE = {
+  storytelling: [
+    {
+      id: 'story', label: 'Story', abbr: 'Sto', title: 'Story Lens',
+      purpose: 'Kiểm tra ảnh có kể đúng câu chuyện chính của project không.',
+      questions: [
+        'Nhìn 3 giây đầu, bạn có hiểu ảnh muốn bán điều gì không?',
+        'Câu chuyện chính có khớp với loại hình công trình không?',
+        'Có yếu tố nào trong ảnh đang nói câu chuyện khác với hero (điểm chính cần khoe) không?',
+        'Nếu xóa một câu story, ảnh có còn đứng vững không?',
+      ],
+    },
+    {
+      id: 'hero', label: 'Hero', abbr: 'Her', title: 'Hero Lens',
+      purpose: 'Kiểm tra hero (điểm chính cần khoe) có đủ rõ và đủ lực hút không.',
+      questions: [
+        'Người xem có nhìn thấy hero trong 3 giây đầu không?',
+        'Hero có đang bị cây, xe, người, sky hoặc foreground (lớp phía trước) lấn át không?',
+        'Khi nheo mắt nhìn ảnh, hero còn nổi không?',
+        'Hero có đúng với selling point (điểm bán chính) của loại công trình không?',
+      ],
+    },
+    {
+      id: 'hierarchy', label: 'Hierarchy', abbr: 'Hie', title: 'Hierarchy Lens',
+      purpose: 'Kiểm tra visual hierarchy (thứ tự chính phụ trong ảnh) — chính / phụ / nền.',
+      questions: [
+        'Bạn có chỉ ra rõ 3 lớp: chính, phụ, nền không?',
+        'Vùng phụ có biết lùi xuống không, hay đang đòi sự chú ý?',
+        'Mắt người xem đi theo trình tự nào?',
+        'Có vùng nào quá nặng làm ảnh mất balance không?',
+      ],
+    },
+    {
+      id: 'contrastBalance', label: 'Contrast & Balance', abbr: 'CB', title: 'Contrast & Balance Lens',
+      purpose: 'Tương phản & cân bằng giữa kiến trúc và các yếu tố phụ. Cây, sky, mây, người, xe, props (đồ trang trí), foreground (lớp trước ảnh) và atmosphere phải tạo đối trọng phù hợp với kiến trúc — không chỉ để lấp chỗ trống. Đừng hỏi asset này có đẹp riêng lẻ không; hãy hỏi nó có làm công trình đúng tính cách hơn không. Yếu tố phụ tốt là yếu tố có vai trò: làm mềm khối cứng, tạo depth (chiều sâu), dẫn mắt, cho scale, tăng lifestyle hoặc làm hero (điểm chính cần khoe) nổi hơn.',
+      questions: [
+        'Kiến trúc chính đang có tính cách gì: mạnh, mềm, tối giản, classic, luxury, resort, urban hay commercial?',
+        'Các yếu tố phụ đang cân bằng tính cách đó hay làm ảnh bị lệch mood (cảm xúc tổng thể)?',
+        'Công trình nhiều đường thẳng / khối mạnh thì cây, mây, bóng đổ và foreground đã đủ mềm để cân bằng chưa?',
+        'Nếu công trình nhiều chi tiết, các yếu tố phụ có đang được tiết chế để không tranh spotlight (sự chú ý chính) không?',
+        'Cây, người, xe, sky hoặc props có đang hỗ trợ hero hay đang kéo mắt khỏi hero?',
+        'Màu cây, màu trời, màu xe, outfit người và props có hòa vào palette (bảng màu tổng thể) không?',
+        'Nếu bỏ một yếu tố phụ ra khỏi ảnh, ảnh sẽ yếu hơn hay sạch hơn?',
+      ],
+    },
+    {
+      id: 'mood', label: 'Mood', abbr: 'Moo', title: 'Mood Lens',
+      purpose: 'Kiểm tra mood (cảm xúc tổng thể) có thống nhất và phù hợp project không.',
+      questions: [
+        'Camera, ánh sáng, material, entourage có cùng nói một mood không?',
+        'Mood có đúng với selling brief (luxury, calm, urban, family...) không?',
+        'Sky / time of day (thời gian trong ngày) có hỗ trợ mood không?',
+        'Color grading (chỉnh màu tổng thể) có nâng mood hay phá mood?',
+      ],
+    },
+    {
+      id: 'distraction', label: 'Gây nhiễu', abbr: 'Dis', title: 'Distraction Lens',
+      purpose: 'Tìm chi tiết đang kéo mắt khỏi hero hoặc làm ảnh kém premium.',
+      questions: [
+        'Có vùng nào sáng quá, tối quá, hoặc bão hòa quá không?',
+        'Cây / xe / người có chiếm sự chú ý quá mức không?',
+        'Có chi tiết bị crop khó chịu ở mép ảnh không?',
+        'Nếu xóa 1 chi tiết, ảnh có mạnh hơn không?',
+      ],
+    },
+  ],
+  camera: [
+    {
+      id: 'framing', label: 'Framing', abbr: 'Fra', title: 'Framing Lens',
+      purpose: 'Kiểm tra crop (cắt khung) và framing (cách dựng khung hình) có hỗ trợ hero và visual flow (dòng mắt) không.',
+      questions: [
+        'Hero có nằm đúng vị trí trong frame không?',
+        'Crop có cắt phải vùng quan trọng không?',
+        'Có khoảng trống nào không cần thiết không?',
+        'Aspect ratio (tỉ lệ khung hình) có đúng deliverable (định dạng giao) không?',
+      ],
+    },
+    {
+      id: 'perspective', label: 'Perspective', abbr: 'Per', title: 'Perspective Lens',
+      purpose: 'Kiểm tra perspective (cảm giác phối cảnh) có làm công trình đẹp, vững và đúng cảm giác kiến trúc không.',
+      questions: [
+        'Vertical lines (đường thẳng đứng) có bị nghiêng ngoài ý đồ không?',
+        'Camera có bị fisheye (mắt cá quá rộng) hoặc quá wide không?',
+        'Focal length (độ rộng / hẹp ống kính) có làm công trình bị méo hoặc kéo dài không?',
+        'Góc nhìn có giúp công trình premium hơn không?',
+      ],
+    },
+    {
+      id: 'vertical', label: 'Vertical', abbr: 'Ver', title: 'Vertical Lens',
+      purpose: 'Kiểm tra các đường vertical (thẳng đứng) kiến trúc có thẳng và kiểm soát.',
+      questions: [
+        'Các đường đứng (cột, mullion, parapet) có thẳng không?',
+        'Có bị keystoning (đỉnh hội tụ) không?',
+        'Two-point perspective có đúng không?',
+        'Tilt-shift (chỉnh perspective trong camera) có cần áp dụng không?',
+      ],
+    },
+    {
+      id: 'focalLength', label: 'Focal Length', abbr: 'Foc', title: 'Focal Length Lens',
+      purpose: 'Kiểm tra focal length (độ rộng / hẹp của ống kính) có cho cảm giác tự nhiên, không méo.',
+      questions: [
+        'Có cảm giác fisheye không (14–18mm)?',
+        'Compression (nén phối cảnh) có đúng cho thể loại ảnh không?',
+        '28–50mm equivalent có phù hợp hơn không?',
+        'Có element nào bị méo ở rìa frame không?',
+      ],
+    },
+    {
+      id: 'depth', label: 'Depth', abbr: 'Dep', title: 'Depth Lens',
+      purpose: 'Kiểm tra chiều sâu trong khung hình.',
+      questions: [
+        'Foreground / midground / background có tách lớp rõ không?',
+        'Có atmospheric perspective (mờ dần theo chiều xa) không?',
+        'Chiều sâu có dẫn mắt vào hero không?',
+        'Ảnh có bị flat (phẳng) không?',
+      ],
+    },
+    {
+      id: 'contrastBalance', label: 'Contrast & Balance', abbr: 'CB', title: 'Contrast & Balance Lens',
+      purpose: 'Tương phản & cân bằng giữa kiến trúc và các yếu tố phụ. Cây, sky, mây, người, xe, props (đồ trang trí), foreground (lớp trước ảnh) và atmosphere phải tạo đối trọng phù hợp với kiến trúc — không chỉ để lấp chỗ trống. Đừng hỏi asset này có đẹp riêng lẻ không; hãy hỏi nó có làm công trình đúng tính cách hơn không. Yếu tố phụ tốt là yếu tố có vai trò: làm mềm khối cứng, tạo depth (chiều sâu), dẫn mắt, cho scale, tăng lifestyle hoặc làm hero (điểm chính cần khoe) nổi hơn.',
+      questions: [
+        'Kiến trúc chính đang có tính cách gì: mạnh, mềm, tối giản, classic, luxury, resort, urban hay commercial?',
+        'Các yếu tố phụ đang cân bằng tính cách đó hay làm ảnh bị lệch mood (cảm xúc tổng thể)?',
+        'Công trình nhiều đường thẳng / khối mạnh thì cây, mây, bóng đổ và foreground đã đủ mềm để cân bằng chưa?',
+        'Nếu công trình nhiều chi tiết, các yếu tố phụ có đang được tiết chế để không tranh spotlight (sự chú ý chính) không?',
+        'Cây, người, xe, sky hoặc props có đang hỗ trợ hero hay đang kéo mắt khỏi hero?',
+        'Màu cây, màu trời, màu xe, outfit người và props có hòa vào palette (bảng màu tổng thể) không?',
+        'Nếu bỏ một yếu tố phụ ra khỏi ảnh, ảnh sẽ yếu hơn hay sạch hơn?',
+      ],
+    },
+    {
+      id: 'safeFrame', label: 'Safe Frame', abbr: 'SF', title: 'Safe Frame Lens',
+      purpose: 'Kiểm tra vùng safe frame và margin (lề an toàn quanh khung hình).',
+      questions: [
+        'Hero có nằm trong safe area không?',
+        'Có element quan trọng bị clip ở mép không?',
+        'Margin (lề) có đủ cho text overlay (chữ chèn) nếu cần không?',
+        'Bốn góc có sạch không?',
+      ],
+    },
+  ],
+  material: [
+    {
+      id: 'material', label: 'Material', abbr: 'Mat', title: 'Material Lens',
+      purpose: 'Kiểm tra material có believable (đáng tin) và đúng project không.',
+      questions: [
+        'Material có khớp reference / brief không?',
+        'Roughness (độ nhám / bóng) và glossiness có đúng cảm giác thực tế không?',
+        'IOR (chỉ số khúc xạ ánh sáng) và refraction có phù hợp không?',
+        'Material có giữ premium level không?',
+      ],
+    },
+    {
+      id: 'textureScale', label: 'Texture Scale', abbr: 'TS', title: 'Texture Scale Lens',
+      purpose: 'Kiểm tra texture (vân vật liệu) và UVW mapping (cách texture bám lên model) có đúng scale (tỉ lệ) thực tế không.',
+      questions: [
+        'Đá, gỗ, tường, mái, vải có đúng kích thước ngoài đời không?',
+        'Texture có bị stretch (kéo giãn), repeat (lặp) hoặc sai UVW mapping không?',
+        'Pattern có làm lộ cảm giác CG không?',
+        'Material có giữ được level premium không?',
+      ],
+    },
+    {
+      id: 'lightingDirection', label: 'Hướng sáng', abbr: 'LD', title: 'Lighting Direction Lens',
+      purpose: 'Kiểm tra hướng ánh sáng có hỗ trợ mood và làm rõ kiến trúc.',
+      questions: [
+        'Hướng sun / key light (đèn chính) có nhất quán toàn scene không?',
+        'Hướng shadow (bóng đổ) có phù hợp với time of day (giờ trong ngày) không?',
+        'Ánh sáng có làm nổi facade và hero không?',
+        'Fill / bounce light (ánh nảy) có quá flat không?',
+      ],
+    },
+    {
+      id: 'exposure', label: 'Exposure', abbr: 'Exp', title: 'Exposure Lens',
+      purpose: 'Kiểm tra exposure (độ sáng tổng thể) không clip highlight và không crush shadow.',
+      questions: [
+        'Highlight (vùng sáng mạnh) ở kính, sky, mái sáng có bị blown (cháy trắng) không?',
+        'Shadow (vùng tối) detail có bị crushed (đen kịt mất chi tiết) không?',
+        'Midtone (vùng trung gian) có đủ contrast không?',
+        'Exposure có giúp hero nổi không?',
+      ],
+    },
+    {
+      id: 'reflection', label: 'Reflection', abbr: 'Ref', title: 'Reflection Lens',
+      purpose: 'Kiểm tra reflection (phản chiếu) trên kính, kim loại, mặt nước.',
+      questions: [
+        'Kính có depth hay bị đen / phẳng?',
+        'Reflection có khớp environment (môi trường xung quanh) không?',
+        'Kim loại có roughness hợp lý không?',
+        'Có ghost reflection (phản chiếu lạ) bất thường không?',
+      ],
+    },
+    {
+      id: 'colorTemperature', label: 'Nhiệt màu', abbr: 'CT', title: 'Color Temperature Lens',
+      purpose: 'Kiểm tra cân bằng warm (ấm) / cool (lạnh) giữa các vùng.',
+      questions: [
+        'Sky, sunlight, interior light có cùng story warm / cool không?',
+        'Có vùng nào bị ám màu (color cast) không?',
+        'Greens / blues / browns có đúng tone project không?',
+        'Có gây cảm giác lạnh / ấm không phù hợp brief không?',
+      ],
+    },
+    {
+      id: 'contrastBalance', label: 'Contrast & Balance', abbr: 'CB', title: 'Contrast & Balance Lens',
+      purpose: 'Tương phản & cân bằng giữa kiến trúc và các yếu tố phụ. Cây, sky, mây, người, xe, props (đồ trang trí), foreground (lớp trước ảnh) và atmosphere phải tạo đối trọng phù hợp với kiến trúc — không chỉ để lấp chỗ trống. Đừng hỏi asset này có đẹp riêng lẻ không; hãy hỏi nó có làm công trình đúng tính cách hơn không. Yếu tố phụ tốt là yếu tố có vai trò: làm mềm khối cứng, tạo depth (chiều sâu), dẫn mắt, cho scale, tăng lifestyle hoặc làm hero (điểm chính cần khoe) nổi hơn.',
+      questions: [
+        'Kiến trúc chính đang có tính cách gì: mạnh, mềm, tối giản, classic, luxury, resort, urban hay commercial?',
+        'Các yếu tố phụ đang cân bằng tính cách đó hay làm ảnh bị lệch mood (cảm xúc tổng thể)?',
+        'Công trình nhiều đường thẳng / khối mạnh thì cây, mây, bóng đổ và foreground đã đủ mềm để cân bằng chưa?',
+        'Nếu công trình nhiều chi tiết, các yếu tố phụ có đang được tiết chế để không tranh spotlight (sự chú ý chính) không?',
+        'Cây, người, xe, sky hoặc props có đang hỗ trợ hero hay đang kéo mắt khỏi hero?',
+        'Màu cây, màu trời, màu xe, outfit người và props có hòa vào palette (bảng màu tổng thể) không?',
+        'Nếu bỏ một yếu tố phụ ra khỏi ảnh, ảnh sẽ yếu hơn hay sạch hơn?',
+      ],
+    },
+  ],
+  render: [
+    {
+      id: 'noise', label: 'Noise', abbr: 'Noi', title: 'Noise Lens',
+      purpose: 'Soi noise, fireflies và vùng render chưa sạch.',
+      questions: [
+        'Vùng shadow, kính, reflection, nội thất có noise không?',
+        'Denoise có làm mất detail không?',
+        'Có fireflies ở highlight hoặc glossy reflection không?',
+        'Ảnh xem ở 100% zoom có đủ sạch không?',
+      ],
+    },
+    {
+      id: 'edge', label: 'Edge', abbr: 'Edg', title: 'Edge Quality Lens',
+      purpose: 'Kiểm tra cạnh và chi tiết nhỏ có sạch không.',
+      questions: [
+        'Có jaggy / aliasing trên cạnh diagonal không?',
+        'Railing, mullion, vegetation có bị stair-stepping không?',
+        'AA samples có đủ không?',
+        'Cạnh contrast cao có sharp đúng mức không?',
+      ],
+    },
+    {
+      id: 'geometry', label: 'Geometry', abbr: 'Geo', title: 'Geometry Lens',
+      purpose: 'Tìm geometry thiếu, sai hoặc floating.',
+      questions: [
+        'Có object nào bay khỏi sàn không?',
+        'Có gap giữa panel facade hoặc tường không?',
+        'Có thấu tường (see-through) bất ngờ không?',
+        'Có element bị thụt sâu vào geometry khác không?',
+      ],
+    },
+    {
+      id: 'contactShadow', label: 'Contact shadow', abbr: 'CS', title: 'Contact Shadow Lens',
+      purpose: 'Kiểm tra contact shadow và AO dưới object.',
+      questions: [
+        'Object có đủ contact shadow để ground nó không?',
+        'AO có đúng cường độ không (không quá đậm)?',
+        'Furniture, người, xe có cảm giác chạm sàn không?',
+        'Vùng góc tường / sàn có shadow đủ depth không?',
+      ],
+    },
+    {
+      id: 'glass', label: 'Glass', abbr: 'Gla', title: 'Glass Lens',
+      purpose: 'Kiểm tra kính có depth, refraction, reflection đúng.',
+      questions: [
+        'Kính có thấy interior phía sau không, hay bị đen?',
+        'Refraction depth có đúng không?',
+        'Reflection trên kính có khớp environment không?',
+        'Mullion có rõ và sharp không?',
+      ],
+    },
+    {
+      id: 'artifacts', label: 'Artifacts', abbr: 'Art', title: 'Artifacts Lens',
+      purpose: 'Tìm splotch, banding, light leak, pass merge sai.',
+      questions: [
+        'Sky có bị banding không?',
+        'GI có splotchy không?',
+        'Có light leak ở seam material không?',
+        'Render passes có bị mis-merged không?',
+      ],
+    },
+  ],
+  post: [
+    {
+      id: 'colorGrading', label: 'Color grading', abbr: 'CG', title: 'Color Grading Lens',
+      purpose: 'Kiểm tra color grading có thống nhất mood và không phá material không.',
+      questions: [
+        'Grade có quá nóng, quá lạnh hoặc lệch brief không?',
+        'Greens có quá bão hòa không?',
+        'Black có bị crushed không?',
+        'Sky, building, landscape và interior light có cùng một mood không?',
+      ],
+    },
+    {
+      id: 'toneWhiteBalance', label: 'Tone & White Balance', abbr: 'TWB', title: 'Tone & White Balance Lens',
+      purpose: 'Cân bằng trắng, sáng tối và độ "căng" của ảnh sau post-production. Ảnh cần có lực mà không bị cháy, bệt hoặc chỉnh quá tay. Ảnh "căng" không phải là kéo contrast (độ tương phản sáng tối) thật mạnh — mà là khi vùng sáng sạch, vùng tối có chiều sâu, midtone (vùng sáng trung bình) rõ, và công trình chính nổi lên mà vẫn giữ được detail.',
+      questions: [
+        'Vùng trắng như tường, trần, đá sáng hoặc giấy trắng có bị ám xanh, ám vàng, ám magenta không?',
+        'Highlight (vùng sáng mạnh) có sạch và còn detail không, hay bị cháy trắng?',
+        'Shadow (vùng tối / bóng đổ) có đủ sâu để ảnh có lực không, hay bị bệt và mất chi tiết?',
+        'Midtone (vùng sáng trung bình) của công trình chính có đủ rõ không, hay bị xám / flat?',
+        'Contrast có giúp ảnh nổi hơn không, hay làm ảnh bị gắt?',
+        'Sky, landscape, công trình và interior light có cùng một white balance (cân bằng trắng) không?',
+        'Khi thu nhỏ ảnh, công trình chính có bật ra rõ không?',
+        'Khi zoom 100%, các vùng chuyển sáng tối có bị banding, halo (viền sáng giả) hoặc quá sharpen (làm nét) không?',
+      ],
+    },
+    {
+      id: 'contrastBalance', label: 'Contrast & Balance', abbr: 'CB', title: 'Contrast & Balance Lens',
+      purpose: 'Tương phản & cân bằng giữa kiến trúc và các yếu tố phụ. Cây, sky, mây, người, xe, props (đồ trang trí), foreground (lớp trước ảnh) và atmosphere phải tạo đối trọng phù hợp với kiến trúc — không chỉ để lấp chỗ trống. Đừng hỏi asset này có đẹp riêng lẻ không; hãy hỏi nó có làm công trình đúng tính cách hơn không. Yếu tố phụ tốt là yếu tố có vai trò: làm mềm khối cứng, tạo depth (chiều sâu), dẫn mắt, cho scale, tăng lifestyle hoặc làm hero (điểm chính cần khoe) nổi hơn.',
+      questions: [
+        'Kiến trúc chính đang có tính cách gì: mạnh, mềm, tối giản, classic, luxury, resort, urban hay commercial?',
+        'Các yếu tố phụ đang cân bằng tính cách đó hay làm ảnh bị lệch mood (cảm xúc tổng thể)?',
+        'Công trình nhiều đường thẳng / khối mạnh thì cây, mây, bóng đổ và foreground đã đủ mềm để cân bằng chưa?',
+        'Nếu công trình nhiều chi tiết, các yếu tố phụ có đang được tiết chế để không tranh spotlight (sự chú ý chính) không?',
+        'Cây, người, xe, sky hoặc props có đang hỗ trợ hero hay đang kéo mắt khỏi hero?',
+        'Màu cây, màu trời, màu xe, outfit người và props có hòa vào palette (bảng màu tổng thể) không?',
+        'Nếu bỏ một yếu tố phụ ra khỏi ảnh, ảnh sẽ yếu hơn hay sạch hơn?',
+      ],
+    },
+    {
+      id: 'overProcessing', label: 'Over-processing', abbr: 'OP', title: 'Over-processing Lens',
+      purpose: 'Tìm dấu hiệu over-sharpen, over-contrast, over-clarity.',
+      questions: [
+        'Có halo quanh cạnh contrast cao không?',
+        'Foliage có bị sạn không?',
+        'Texture có bị crunchy không?',
+        'Ảnh có cảm giác post quá tay không?',
+      ],
+    },
+    {
+      id: 'entourage', label: 'Entourage', abbr: 'Ent', title: 'Entourage Integration Lens',
+      purpose: 'Kiểm tra entourage có hòa với scene về light, scale, mood.',
+      questions: [
+        'Người, xe, cây có lit cùng hướng sun không?',
+        'Scale của entourage có đúng không?',
+        'Có contact shadow dưới entourage không?',
+        'Color temperature của entourage có khớp scene không?',
+      ],
+    },
+    {
+      id: 'crop', label: 'Crop / mép ảnh', abbr: 'Cro', title: 'Crop & Border Lens',
+      purpose: 'Kiểm tra crop và 4 mép có sạch.',
+      questions: [
+        'Có element bị crop khó chịu ở mép không?',
+        'Aspect ratio có đúng deliverable không?',
+        'Sky có quá cao hoặc quá thấp không?',
+        '4 góc có sạch không?',
+      ],
+    },
+    {
+      id: 'clientComments', label: 'Client Comments', abbr: 'CC', title: 'Client Comments Lens',
+      purpose: 'Verify mọi comment client đã được xử lý.',
+      questions: [
+        'Bạn đã mở file markup mới nhất chưa?',
+        'Mỗi comment có được xử lý hoặc đánh dấu chưa?',
+        'Có comment nào áp dụng nhầm view không?',
+        'Có comment nào còn đang hiểu sai không?',
+      ],
+    },
+    {
+      id: 'export', label: 'Export', abbr: 'Exp', title: 'Export Quality Lens',
+      purpose: 'Kiểm tra filename, format, profile, resolution trước khi gửi.',
+      questions: [
+        'Filename có đúng convention không?',
+        'Format và color profile có đúng spec không?',
+        'Resolution có đúng deliverable không?',
+        'Embedded preview có chất lượng đúng không?',
+      ],
+    },
+  ],
+}
+
+// Focus Coach — context-aware self-check question that whispers what to look at right now.
+// Lookup priority: expanded checklist item → active lens → phase default.
+const PHASE_COACH = {
+  storytelling: {
+    question: 'Trước khi sửa chi tiết, ảnh này đang bán điều gì?',
+    hint: 'Nếu không trả lời được bằng một câu ngắn, direction của ảnh có thể đang bị lan man.',
   },
-  {
-    id: 'composition', label: 'Composition', abbr: 'C', title: 'Composition Lens',
-    purpose: 'Kiểm tra cách mắt người xem đi qua ảnh và mức độ cân bằng thị giác.',
-    questions: [
-      'Mắt người xem đi từ đâu đến đâu?',
-      'Foreground đang tạo chiều sâu hay che mất hero?',
-      'Sky, công trình và landscape có cân bằng không?',
-      'Vertical lines có được kiểm soát không?',
-      'Có vùng nào quá nặng hoặc quá trống không?',
-    ],
+  camera: {
+    question: 'Mắt người xem có được dẫn vào công trình chính một cách tự nhiên không?',
+    hint: 'Nhìn flow từ foreground, đường nét kiến trúc, ánh sáng và khoảng trống.',
   },
-  {
-    id: 'lighting', label: 'Lighting', abbr: 'L', title: 'Lighting Lens',
-    purpose: 'Kiểm tra ánh sáng có nâng mood, làm rõ kiến trúc và tạo chiều sâu không.',
-    questions: [
-      'Ánh sáng có làm nổi facade / hero chính không?',
-      'Shadow còn đủ detail hay bị chết?',
-      'Highlight trên tường trắng, kính, mái có bị gắt không?',
-      'Interior light có tạo cảm giác sống không?',
-      'Light direction có hỗ trợ story không?',
-    ],
+  material: {
+    question: 'Material và ánh sáng có làm công trình thật hơn và đúng mood hơn không?',
+    hint: 'So sánh cảm giác bề mặt, roughness, shadow và white balance.',
   },
-  {
-    id: 'material', label: 'Material', abbr: 'M', title: 'Material Lens',
-    purpose: 'Kiểm tra material có believable, đúng scale và phản ứng ánh sáng hợp lý không.',
-    questions: [
-      'Đá, gỗ, tường, mái, kính, kim loại có đúng scale không?',
-      'Roughness có tự nhiên không?',
-      'Kính có depth hay bị đen / phẳng?',
-      'Texture có bị lặp, stretch, sai mapping không?',
-      'Material có đúng level premium của project không?',
-    ],
+  render: {
+    question: 'Nếu zoom 100%, ảnh còn sạch và đủ chi tiết không?',
+    hint: 'Soi noise, edge, contact shadow, glass và các vùng tối.',
   },
-  {
-    id: 'depth', label: 'Depth', abbr: 'D', title: 'Depth Lens',
-    purpose: 'Kiểm tra ảnh có đủ lớp không gian và chiều sâu thị giác không.',
-    questions: [
-      'Foreground, midground, background có tách lớp rõ không?',
-      'Cây, cổng, xe, người có giúp tạo depth không?',
-      'Không gian có bị phẳng không?',
-      'Shadow và atmospheric depth có dẫn mắt vào hero không?',
-      'Có layer nào quá mạnh làm che mất layer chính không?',
-    ],
+  post: {
+    question: 'Post-production đang làm ảnh sang hơn hay đang làm ảnh bị gắt / giả?',
+    hint: 'Kiểm tra color grading, contrast, saturation, sharpen và crop.',
   },
-  {
-    id: 'distraction', label: 'Distraction', abbr: 'X', title: 'Distraction Lens',
-    purpose: 'Tìm các chi tiết đang kéo mắt khỏi hero hoặc làm giảm chất lượng ảnh.',
-    questions: [
-      'Có vật nào sáng quá, tối quá hoặc bão hòa quá không?',
-      'Cây, xe, người, sky, foreground có chiếm attention quá mức không?',
-      'Có chi tiết nào bị cắt khó chịu ở mép ảnh không?',
-      'Có vùng nào làm ảnh rối hoặc kém premium không?',
-      'Nếu xóa 1 chi tiết để ảnh mạnh hơn, đó là chi tiết nào?',
-    ],
+}
+
+// Keys are `${phaseId}:${lensId}`. Hint is optional.
+const LENS_COACH = {
+  // Storytelling
+  'storytelling:story': { question: 'Ảnh này có một câu chuyện chính rõ ràng không, hay đang cố nói quá nhiều thứ?' },
+  'storytelling:hero': {
+    question: 'Hero có đủ mạnh để người xem nhớ ngay sau 3 giây không?',
+    hint: 'Nheo mắt hoặc thu nhỏ ảnh để kiểm tra thứ gì nổi lên đầu tiên.',
   },
-  {
-    id: 'premium', label: 'Premium Mood', abbr: 'P', title: 'Premium Mood Lens',
-    purpose: 'Đánh giá cảm giác "đắt", high-end và mức độ hoàn thiện của ảnh.',
-    questions: [
-      'Ảnh có cảm giác luxury / premium chưa?',
-      'Cảnh quan có đủ chăm chút không?',
-      'Entrance, balcony, lighting, material có tạo cảm giác high-end không?',
-      'Color grading có làm ảnh sang hơn hay làm ảnh rẻ đi?',
-      'Ảnh này đã đủ mạnh để làm hero render chưa?',
-    ],
+  'storytelling:hierarchy': { question: 'Đâu là chính, đâu là phụ, đâu là noise?' },
+  'storytelling:contrastBalance': { question: 'Yếu tố phụ đang tạo đối trọng tốt cho kiến trúc hay đang tranh spotlight?' },
+  'storytelling:mood': { question: 'Tất cả yếu tố trong ảnh có đang cùng phục vụ một mood không?' },
+  'storytelling:distraction': { question: 'Nếu phải xóa một chi tiết gây nhiễu, bạn sẽ xóa gì trước?' },
+
+  // Camera & Composition
+  'camera:framing': { question: 'Khung hình này đang khoe đúng phần đẹp nhất của công trình chưa?' },
+  'camera:perspective': {
+    question: 'Góc máy này đang làm công trình sang hơn, hay đang làm nó méo / yếu đi?',
+    hint: 'Kiểm tra vertical, focal length và cảm giác vững của khối kiến trúc.',
   },
-]
+  'camera:vertical': { question: 'Các đường đứng có được kiểm soát, hay đang làm công trình bị đổ / méo?' },
+  'camera:focalLength': { question: 'Focal length đang giúp ảnh tự nhiên hay làm hình bị quá wide / fisheye?' },
+  'camera:depth': { question: 'Foreground, midground, background có tạo depth rõ không?' },
+  'camera:contrastBalance': { question: 'Cây, mây, foreground có làm mềm và cân bằng khối kiến trúc không?' },
+  'camera:safeFrame': { question: 'Có chi tiết quan trọng nào bị sát mép hoặc bị crop khó chịu không?' },
+
+  // Material & Lighting
+  'material:material': { question: 'Material chính có believable không, hay vẫn còn cảm giác CG?' },
+  'material:textureScale': { question: 'Texture có đúng scale thực tế khi so với người, cửa, xe hoặc furniture không?' },
+  'material:lightingDirection': { question: 'Hướng sáng có làm nổi hero hay đang làm vùng chính bị chìm?' },
+  'material:exposure': { question: 'Ảnh có đủ sáng để đọc rõ công trình mà không bị cháy highlight không?' },
+  'material:reflection': { question: 'Kính, nước, kim loại có phản xạ đúng môi trường không?' },
+  'material:colorTemperature': { question: 'Nhiệt màu của sky, đèn, interior và landscape có hòa nhau không?' },
+  'material:contrastBalance': {
+    question: 'Cây, sky, người, xe có đang làm công trình đúng tính cách hơn không?',
+    hint: 'Yếu tố phụ tốt phải làm hero mạnh hơn, không chỉ lấp chỗ trống.',
+  },
+
+  // Render Quality
+  'render:noise': { question: 'Vùng tối, kính và reflection có noise / fireflies không?' },
+  'render:edge': { question: 'Các cạnh mảnh như lan can, khung kính, mái có sạch không?' },
+  'render:geometry': { question: 'Có vật thể nào bị lơ lửng, xuyên nhau, thiếu hoặc sai vị trí không?' },
+  'render:contactShadow': { question: 'Đồ vật có chạm đất và có trọng lượng không?' },
+  'render:glass': { question: 'Kính có depth hay đang bị đen, phẳng hoặc quá gương?' },
+  'render:artifacts': { question: 'Có lỗi render nào nhìn thấy ngay khi zoom 100% không?' },
+
+  // Post Production
+  'post:colorGrading': { question: 'Màu tổng thể có nâng mood hay làm lệch cảm giác material?' },
+  'post:toneWhiteBalance': {
+    question: 'Ảnh đang "căng" vì tone sạch, hay chỉ vì contrast bị kéo quá mạnh?',
+    hint: 'Kiểm tra vùng trắng, highlight, shadow và midtone của công trình.',
+  },
+  'post:contrastBalance': { question: 'Post có giữ được sự cân bằng giữa kiến trúc, sky, landscape và entourage không?' },
+  'post:overProcessing': { question: 'Ảnh có dấu hiệu chỉnh quá tay như halo, sharpen mạnh, saturation gắt không?' },
+  'post:entourage': { question: 'Người, cây, xe, props có hòa vào ảnh hay nhìn như dán thêm?' },
+  'post:crop': { question: 'Mép ảnh có chi tiết nào bị cắt khó chịu hoặc gây mất tập trung không?' },
+  'post:clientComments': { question: 'Những comment quan trọng nhất đã được xử lý thật sự chưa?' },
+  'post:export': { question: 'File cuối có đúng format, size, color profile và đủ chất lượng chưa?' },
+}
+
+// Keys match the storage key shape used by the checklist (storytelling items
+// are namespaced by projectType). Only important items get coach questions —
+// everything else falls back to lens or phase question.
+const ITEM_COACH = {
+  // Storytelling general (per-projectType key)
+  'storytelling:general:1': {
+    question: 'Hero có đủ mạnh để người xem nhớ ngay sau 3 giây không?',
+    hint: 'Nheo mắt hoặc thu nhỏ ảnh để kiểm tra thứ gì nổi lên đầu tiên.',
+  },
+  'storytelling:general:2': {
+    question: 'Bạn có chỉ ra rõ 3 lớp: chính, phụ, nền không?',
+    hint: 'Nếu mọi vùng đều đòi attention như nhau, ảnh đang thiếu hierarchy.',
+  },
+  'storytelling:general:4': {
+    question: 'Chi tiết này đang giúp ảnh mạnh hơn, hay chỉ làm bạn cảm thấy ảnh "đầy" hơn?',
+    hint: 'Nếu bỏ chi tiết đó đi mà ảnh sạch và rõ hơn, nó có thể là noise.',
+  },
+  'storytelling:general:5': {
+    question: 'Tất cả yếu tố trong ảnh có đang cùng phục vụ một mood không?',
+    hint: 'Camera, lighting, material, entourage và color grading phải cùng nói một ngôn ngữ.',
+  },
+
+  // Camera
+  'camera:1': {
+    question: 'Khung hình này đang khoe đúng phần đẹp nhất của công trình chưa?',
+    hint: 'Hình dung nghiêng ảnh — có quadrant nào quá trống hoặc quá nặng không?',
+  },
+  'camera:2': {
+    question: 'Các đường đứng có được kiểm soát, hay đang làm công trình bị đổ / méo?',
+    hint: 'Đặt thước thẳng đứng cạnh màn hình — các cột công trình có song song không?',
+  },
+  'camera:3': {
+    question: 'Focal length đang giúp ảnh tự nhiên hay làm hình bị quá wide / fisheye?',
+    hint: '28–50mm equivalent thường gần với cách kiến trúc sư chụp ảnh thật.',
+  },
+
+  // Material
+  'material:1': {
+    question: 'Nếu đặt một người đứng cạnh bề mặt này, texture còn đúng kích thước không?',
+    hint: 'So scale của vân gỗ, đá, gạch, vải với cửa, tay vịn, người hoặc xe.',
+  },
+  'material:3': {
+    question: 'Hướng sáng có làm nổi hero hay đang làm vùng chính bị chìm?',
+    hint: 'Trace một shadow ngược về source — source đó có nhất quán với mọi shadow khác không?',
+  },
+  'material:5': {
+    question: 'Kính, nước, kim loại có phản xạ đúng môi trường không?',
+    hint: 'Reflection phải khớp object xung quanh về vị trí và độ mềm.',
+  },
+
+  // Render
+  'render:0': {
+    question: 'Vùng tối, kính và reflection có noise / fireflies không?',
+    hint: 'Xem ảnh ở 100% zoom và quét từ các góc về focal point.',
+  },
+  'render:5': {
+    question: 'Có lỗi render nào nhìn thấy ngay khi zoom 100% không?',
+    hint: 'Soi sky banding, GI splotchy, light leak ở seam material.',
+  },
+
+  // Post
+  'post:0': {
+    question: 'Màu tổng thể có nâng mood hay làm lệch cảm giác material?',
+    hint: 'Squint hoặc thu nhỏ ảnh — phải đọc thành một mood thống nhất.',
+  },
+  'post:1': {
+    question: 'Ảnh có đang bị đẹp kiểu "gắt" thay vì sang không?',
+    hint: 'Giảm clarity, sharpen, saturation hoặc local contrast nếu thấy halo và viền giả.',
+  },
+  'post:2': {
+    question: 'Người, cây, xe có hòa vào scene hay nhìn như dán thêm?',
+    hint: 'Check hướng sun, shadow contact, color temperature và scale.',
+  },
+  'post:3': {
+    question: 'Mép ảnh có chi tiết nào bị cắt khó chịu hoặc gây mất tập trung không?',
+    hint: 'Soi 4 cạnh và 4 góc; aspect ratio có đúng deliverable không?',
+  },
+  'post:6': {
+    question: 'Khi thu nhỏ ảnh, vùng trắng có còn cảm giác sạch và công trình có bật ra không?',
+    hint: 'Check ám màu trên trắng, highlight detail, shadow depth, midtone clarity.',
+  },
+}
 
 // Mark types — visual styles centralized so both helper toolbar and overlay use same colors.
 const MARK_TYPES = [
@@ -503,6 +1066,15 @@ const FILTERS = [
   { id: 'unchecked', label: 'Chưa kiểm' },
   { id: 'passed', label: 'Đạt' },
 ]
+
+// Compact phase labels for the sidebar tab strip. Full official names live in PHASES[].name.
+const PHASE_SHORT_NAMES = {
+  storytelling: 'Storytelling',
+  camera: 'Camera',
+  material: 'Material',
+  render: 'Render',
+  post: 'Post',
+}
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -556,11 +1128,21 @@ const loadState = () => {
       ...parsed,
       items: { ...def.items, ...(parsed.items || {}) },
       marks: Array.isArray(parsed.marks) ? parsed.marks : [],
-      lensScores: parsed.lensScores && typeof parsed.lensScores === 'object' ? parsed.lensScores : {},
+      lensScores: migrateLensScores(parsed.lensScores),
     }
   } catch {
     return defaultState()
   }
+}
+
+// Old shape was a flat { lensId: number } map across all phases.
+// New shape is { phaseId: { lensId: number } }. If we detect the old shape
+// (any value is a primitive number), discard it — the IDs no longer match.
+const migrateLensScores = (raw) => {
+  if (!raw || typeof raw !== 'object') return {}
+  const looksOldFlat = Object.values(raw).some((v) => typeof v === 'number')
+  if (looksOldFlat) return {}
+  return raw
 }
 
 const loadTheme = () => {
@@ -582,7 +1164,16 @@ export default function App() {
   const [expandedItemId, setExpandedItemId] = useState(null)
   const [theme, setTheme] = useState(loadTheme)
   // local UI state (not persisted)
-  const [activeLens, setActiveLens] = useState(null)
+  // activeLensByPhase remembers each phase's selected lens; defaults to the first
+  // lens of each phase on first mount, then user can change or deselect per phase.
+  const [activeLensByPhase, setActiveLensByPhase] = useState(() => {
+    const init = {}
+    for (const phaseId in LENSES_BY_PHASE) {
+      const lenses = LENSES_BY_PHASE[phaseId]
+      if (lenses && lenses.length > 0) init[phaseId] = lenses[0].id
+    }
+    return init
+  })
   const [markMode, setMarkMode] = useState('select')
   const [selectedMarkId, setSelectedMarkId] = useState(null)
   const [showHelp, setShowHelp] = useState(false)
@@ -618,7 +1209,7 @@ export default function App() {
         ...s.marks,
         {
           id: `m-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-          lens: activeLens,
+          lens: activeLensByPhase[s.activePhase] || null,
           phase: s.activePhase,
           createdAt: Date.now(),
           ...markData,
@@ -637,7 +1228,7 @@ export default function App() {
 
   const clearAllMarks = () => {
     if (state.marks.length === 0) return
-    if (confirm('Xóa tất cả marks?')) {
+    if (confirm('Xóa tất cả mark trên ảnh?')) {
       setState((s) => ({ ...s, marks: [] }))
       setSelectedMarkId(null)
     }
@@ -649,11 +1240,16 @@ export default function App() {
       marks: s.marks.map((m) => (m.id === id ? { ...m, note } : m)),
     }))
 
-  const setLensScore = (lensId, score) =>
-    setState((s) => ({
-      ...s,
-      lensScores: { ...s.lensScores, [lensId]: score },
-    }))
+  const setLensScore = (phaseId, lensId, score) =>
+    setState((s) => {
+      const phaseScores = { ...(s.lensScores[phaseId] || {}) }
+      if (score == null) delete phaseScores[lensId]
+      else phaseScores[lensId] = score
+      return {
+        ...s,
+        lensScores: { ...s.lensScores, [phaseId]: phaseScores },
+      }
+    })
 
   // Counts
   const visibleKeys = []
@@ -673,7 +1269,7 @@ export default function App() {
   const status = needsFixCount > 0
     ? { label: 'Cần sửa', color: 'rose' }
     : allPassed
-      ? { label: 'Sẵn sàng', color: 'emerald' }
+      ? { label: 'Sẵn sàng review', color: 'emerald' }
       : { label: 'Chưa sẵn sàng', color: 'slate' }
 
   const activePhase = PHASES.find((p) => p.id === state.activePhase) || PHASES[0]
@@ -699,11 +1295,33 @@ export default function App() {
 
   const remainingCount = totalItems - passedCount
 
-  // Senior Review Score average (only count scored lenses)
-  const scoredLenses = LENSES.filter((l) => typeof state.lensScores[l.id] === 'number')
-  const avgLensScore = scoredLenses.length === 0
+  // Lens scores — overall avg (chrome bar) + current phase avg (sidebar footer)
+  const allLensScoreValues = []
+  for (const phaseId in state.lensScores) {
+    const phaseScores = state.lensScores[phaseId]
+    if (phaseScores) {
+      for (const lensId in phaseScores) {
+        const v = phaseScores[lensId]
+        if (typeof v === 'number') allLensScoreValues.push(v)
+      }
+    }
+  }
+  const overallAvgLensScore = allLensScoreValues.length === 0
     ? null
-    : scoredLenses.reduce((sum, l) => sum + state.lensScores[l.id], 0) / scoredLenses.length
+    : allLensScoreValues.reduce((a, b) => a + b, 0) / allLensScoreValues.length
+
+  // Per-phase active lens + lens objects + scores for the current phase
+  const phaseLenses = LENSES_BY_PHASE[activePhase.id] || []
+  const activeLens = activeLensByPhase[activePhase.id] || null
+  const setActiveLens = (lensId) =>
+    setActiveLensByPhase((prev) => ({ ...prev, [activePhase.id]: lensId }))
+  const activeLensData = activeLens ? phaseLenses.find((l) => l.id === activeLens) : null
+  const phaseLensScores = state.lensScores[activePhase.id] || {}
+  const activeLensScore = activeLens ? phaseLensScores[activeLens] ?? null : null
+  const phaseScoredLenses = phaseLenses.filter((l) => typeof phaseLensScores[l.id] === 'number')
+  const phaseAvgLensScore = phaseScoredLenses.length === 0
+    ? null
+    : phaseScoredLenses.reduce((sum, l) => sum + phaseLensScores[l.id], 0) / phaseScoredLenses.length
 
   // Mark counts by type
   const markCounts = MARK_TYPES.reduce((acc, t) => {
@@ -711,16 +1329,19 @@ export default function App() {
     return acc
   }, {})
 
-  const activeLensData = activeLens ? LENSES.find((l) => l.id === activeLens) : null
-  const activeLensScore = activeLens ? state.lensScores[activeLens] : null
-
   const resetAll = () => {
-    if (confirm('Reset toàn bộ status, ghi chú, marks và điểm lens? Project info cũng sẽ bị xóa.')) {
+    if (confirm('Reset toàn bộ checklist, ghi chú, marks và điểm lens? Cả thông tin project cũng sẽ bị xóa.')) {
       localStorage.removeItem(STORAGE_KEY)
       setState(defaultState())
       setSelectedMarkId(null)
-      setActiveLens(null)
       setMarkMode('select')
+      // re-init each phase's lens to its first lens
+      const init = {}
+      for (const phaseId in LENSES_BY_PHASE) {
+        const lenses = LENSES_BY_PHASE[phaseId]
+        if (lenses && lenses.length > 0) init[phaseId] = lenses[0].id
+      }
+      setActiveLensByPhase(init)
     }
   }
 
@@ -770,9 +1391,9 @@ export default function App() {
                 <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></span>{uncheckedCount}
               </span>
             </div>
-            {avgLensScore !== null && (
+            {overallAvgLensScore !== null && (
               <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full border border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-500/40 dark:bg-cyan-500/15 dark:text-cyan-300 tabular-nums">
-                Senior {avgLensScore.toFixed(1)}/5
+                Senior {overallAvgLensScore.toFixed(1)}/5
               </span>
             )}
             <button
@@ -803,41 +1424,10 @@ export default function App() {
       </header>
 
       <main className="w-full px-4 py-2 flex-1 flex flex-col min-h-0 gap-2">
-        <div className="border-b border-slate-200 shrink-0 dark:border-white/10">
-          <nav className="flex gap-0.5 -mb-px overflow-x-auto">
-            {PHASES.map((phase) => {
-              const items = getActiveItems(phase.id, state.projectType)
-              const phItems = items.map((_, idx) => state.items[getItemKey(phase.id, state.projectType, idx)])
-              const phPassed = phItems.filter((it) => it?.status === 'passed').length
-              const phFix = phItems.filter((it) => it?.status === 'needsfix').length
-              const isActive = state.activePhase === phase.id
-              return (
-                <button
-                  key={phase.id}
-                  onClick={() => update({ activePhase: phase.id })}
-                  className={`px-3 py-1.5 text-xs font-medium border-b-2 transition whitespace-nowrap ${
-                    isActive
-                      ? 'border-slate-900 text-slate-900 dark:border-slate-100 dark:text-slate-100'
-                      : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'
-                  }`}
-                >
-                  <span className="mr-1.5 text-[10px] text-slate-400 dark:text-slate-500">{phase.number}.</span>
-                  {phase.name}
-                  <span className="ml-1.5 text-[10px] text-slate-400 dark:text-slate-500">{phPassed}/{items.length}</span>
-                  {phFix > 0 && (
-                    <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-rose-500" title={`${phFix} mục cần sửa`}></span>
-                  )}
-                </button>
-              )
-            })}
-          </nav>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(380px,26vw,480px)] gap-3 flex-1 min-h-0 lg:min-h-[620px]">
           <div className="min-w-0 min-h-0">
             <ImageReviewHelper
               phase={activePhase}
-              lens={{ items: LENSES, active: activeLens, set: setActiveLens }}
               marking={{
                 types: MARK_TYPES,
                 mode: markMode,
@@ -853,6 +1443,39 @@ export default function App() {
           </div>
 
           <aside className="bg-white border border-slate-200 rounded-lg flex flex-col min-h-0 overflow-hidden dark:bg-[#111827] dark:border-white/10">
+            {/* Phase tabs — sit at the top of the QC control panel so the active tab visually connects to the checklist below */}
+            <div className="border-b border-slate-200 shrink-0 dark:border-white/10">
+              <nav className="flex gap-0 -mb-px overflow-x-auto">
+                {PHASES.map((phase) => {
+                  const items = getActiveItems(phase.id, state.projectType)
+                  const phItems = items.map((_, idx) => state.items[getItemKey(phase.id, state.projectType, idx)])
+                  const phPassed = phItems.filter((it) => it?.status === 'passed').length
+                  const phFix = phItems.filter((it) => it?.status === 'needsfix').length
+                  const isActive = state.activePhase === phase.id
+                  return (
+                    <button
+                      key={phase.id}
+                      type="button"
+                      onClick={() => update({ activePhase: phase.id })}
+                      title={phase.name}
+                      className={`px-2.5 py-2 text-xs font-medium border-b-2 transition whitespace-nowrap shrink-0 ${
+                        isActive
+                          ? 'border-slate-900 text-slate-900 dark:border-slate-100 dark:text-slate-100'
+                          : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'
+                      }`}
+                    >
+                      <span className="mr-1 text-[10px] text-slate-400 dark:text-slate-500">{phase.number}.</span>
+                      {PHASE_SHORT_NAMES[phase.id] || phase.name}
+                      <span className="ml-1.5 text-[10px] text-slate-400 dark:text-slate-500 tabular-nums">{phPassed}/{items.length}</span>
+                      {phFix > 0 && (
+                        <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-rose-500" title={`${phFix} mục cần sửa`}></span>
+                      )}
+                    </button>
+                  )
+                })}
+              </nav>
+            </div>
+
             <header className="px-4 py-3 border-b border-slate-200 shrink-0 dark:border-white/10">
               <div className="flex items-center justify-between gap-2 mb-1">
                 <h2 className="text-sm font-semibold text-slate-800 dark:text-slate-100">{activePhase.name}</h2>
@@ -887,11 +1510,46 @@ export default function App() {
 
             {activePhase.id === 'storytelling' && <QuickTestsBlock />}
 
+            <FocusCoach
+              phaseId={activePhase.id}
+              lensId={activeLens}
+              expandedItemKey={expandedItemId}
+            />
+
+            {/* Phase-specific lens selector — under the phase header */}
+            {phaseLenses.length > 0 && (
+              <div className="px-3 py-1.5 border-b border-slate-200 dark:border-white/10 shrink-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-0.5">
+                    Lens
+                  </span>
+                  {phaseLenses.map((l) => {
+                    const active = activeLens === l.id
+                    return (
+                      <button
+                        key={l.id}
+                        type="button"
+                        onClick={() => setActiveLens(active ? null : l.id)}
+                        title={l.purpose}
+                        className={`px-2 py-0.5 text-[11px] font-medium rounded transition ${
+                          active
+                            ? 'bg-cyan-600 text-white dark:bg-cyan-500'
+                            : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'
+                        }`}
+                      >
+                        {l.label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
             {activeLensData && (
               <LensGuidancePanel
                 lens={activeLensData}
                 score={activeLensScore}
-                onScore={(n) => setLensScore(activeLensData.id, n)}
+                onScore={(n) => setLensScore(activePhase.id, activeLensData.id, n)}
               />
             )}
 
@@ -953,7 +1611,7 @@ export default function App() {
             </div>
 
             <div className="border-t border-slate-200 p-3 shrink-0 dark:border-white/10">
-              <SeniorReviewSummary lensScores={state.lensScores} avg={avgLensScore} />
+              <SeniorReviewSummary lenses={phaseLenses} scores={phaseLensScores} avg={phaseAvgLensScore} />
               <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 mt-2">
                 {allPassed
                   ? 'Tất cả check đã đạt. Có thể đánh dấu ảnh sẵn sàng review.'
@@ -983,39 +1641,58 @@ export default function App() {
 }
 
 function LensGuidancePanel({ lens, score, onScore }) {
+  const [expanded, setExpanded] = useState(true)
   return (
-    <div className="px-4 py-3 border-b border-slate-200 bg-cyan-50/40 dark:border-white/10 dark:bg-cyan-500/5 shrink-0">
-      <div className="flex items-center justify-between gap-2 mb-1">
+    <div className="border-b border-slate-200 bg-cyan-50/40 dark:border-white/10 dark:bg-cyan-500/5 shrink-0">
+      <button
+        type="button"
+        onClick={() => setExpanded((e) => !e)}
+        aria-expanded={expanded}
+        className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-cyan-100/40 dark:hover:bg-cyan-500/10 transition"
+      >
+        <ChevronIcon open={expanded} />
         <h3 className="text-xs font-semibold text-cyan-700 dark:text-cyan-300 uppercase tracking-wide">
           {lens.title}
         </h3>
-        <span className="text-[10px] text-slate-500 dark:text-slate-400">Senior Review Lens</span>
-      </div>
-      <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug mb-2">
-        {lens.purpose}
-      </p>
-      <ul className="text-[11px] text-slate-700 dark:text-slate-200 space-y-1 mb-2.5 list-disc list-inside">
-        {lens.questions.map((q, i) => (
-          <li key={i} className="leading-snug">{q}</li>
-        ))}
-      </ul>
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Điểm lens:</span>
-        {[1, 2, 3, 4, 5].map((n) => (
-          <button
-            key={n}
-            type="button"
-            onClick={() => onScore(score === n ? null : n)}
-            className={`w-7 h-7 text-[11px] font-semibold rounded transition ${
-              score === n
-                ? 'bg-cyan-600 text-white dark:bg-cyan-500'
-                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-white/10 dark:hover:bg-white/10'
-            }`}
-          >
-            {n}
-          </button>
-        ))}
-        <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-auto">1=yếu · 3=ổn · 5=mạnh</span>
+        <span className="ml-auto text-[10px] text-slate-500 dark:text-slate-400 shrink-0">
+          Senior Review Lens
+        </span>
+      </button>
+      <div className="px-4 pb-3">
+        {expanded && (
+          <>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug mb-2">
+              {lens.purpose}
+            </p>
+            <ul className="text-[11px] text-slate-700 dark:text-slate-200 space-y-1 mb-2.5 list-disc list-inside">
+              {lens.questions.map((q, i) => (
+                <li key={i} className="leading-snug">{q}</li>
+              ))}
+            </ul>
+          </>
+        )}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">Điểm lens:</span>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              key={n}
+              type="button"
+              onClick={() => onScore(score === n ? null : n)}
+              className={`w-7 h-7 text-[11px] font-semibold rounded transition ${
+                score === n
+                  ? 'bg-cyan-600 text-white dark:bg-cyan-500'
+                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:border-white/10 dark:hover:bg-white/10'
+              }`}
+            >
+              {n}
+            </button>
+          ))}
+          {expanded && (
+            <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-auto">
+              1=yếu · 3=ổn · 5=mạnh
+            </span>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -1064,7 +1741,7 @@ function MarksSummary({ marks, pinsSorted, markCounts, markTypes, selectedId, on
                 type="text"
                 value={pin.note || ''}
                 onChange={(e) => onUpdateNote(pin.id, e.target.value)}
-                placeholder="Ghi chú…"
+                placeholder="Ghi chú nếu cần…"
                 className="flex-1 min-w-0 px-1.5 py-0.5 text-[11px] border border-slate-200 rounded bg-white dark:border-white/10 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white/30"
               />
               <button
@@ -1083,7 +1760,8 @@ function MarksSummary({ marks, pinsSorted, markCounts, markTypes, selectedId, on
   )
 }
 
-function SeniorReviewSummary({ lensScores, avg }) {
+function SeniorReviewSummary({ lenses, scores, avg }) {
+  if (!lenses || lenses.length === 0) return null
   return (
     <div className="text-[11px] text-slate-600 dark:text-slate-400 flex items-center gap-x-1.5 gap-y-1 flex-wrap">
       <span className="font-semibold text-slate-700 dark:text-slate-300">Senior Review:</span>
@@ -1091,8 +1769,8 @@ function SeniorReviewSummary({ lensScores, avg }) {
         {avg !== null ? `${avg.toFixed(1)}/5` : '—'}
       </span>
       <span className="text-slate-300 dark:text-slate-600">·</span>
-      {LENSES.map((l) => {
-        const s = lensScores[l.id]
+      {lenses.map((l) => {
+        const s = scores[l.id]
         return (
           <span key={l.id} className="tabular-nums" title={l.title}>
             {l.abbr}
@@ -1175,13 +1853,16 @@ function ChecklistItem({ item, status, note, onStatus, onNote, isExpanded, onTog
 
       {isExpanded && (
         <div className="px-3 pb-3 pt-2 border-t border-slate-100 dark:border-white/5" onClick={(e) => e.stopPropagation()}>
+          <p className="text-[10px] italic text-slate-500 dark:text-slate-400 mb-2">
+            Đọc mục này như câu hỏi tự kiểm trước khi đánh dấu Đạt.
+          </p>
           <dl className="space-y-1 text-[11px] leading-snug text-slate-600 dark:text-slate-300">
             <div><dt className="inline font-semibold text-slate-500 dark:text-slate-400">Cần nhìn — </dt><dd className="inline">{item.lookAt}</dd></div>
-            <div><dt className="inline font-semibold text-slate-500 dark:text-slate-400">Góc nhìn expert — </dt><dd className="inline">{item.cue}</dd></div>
+            <div><dt className="inline font-semibold text-slate-500 dark:text-slate-400">Cách nhìn của senior — </dt><dd className="inline">{item.cue}</dd></div>
             <div><dt className="inline font-semibold text-amber-700 dark:text-amber-400">Lỗi thường gặp — </dt><dd className="inline">{item.common}</dd></div>
             <div><dt className="inline font-semibold text-emerald-700 dark:text-emerald-400">Hướng xử lý — </dt><dd className="inline">{item.fix}</dd></div>
             {item.selfCheck && (
-              <div><dt className="inline font-semibold text-cyan-700 dark:text-cyan-300">Câu hỏi tự check — </dt><dd className="inline">{item.selfCheck}</dd></div>
+              <div><dt className="inline font-semibold text-cyan-700 dark:text-cyan-300">Câu hỏi tự kiểm — </dt><dd className="inline">{item.selfCheck}</dd></div>
             )}
           </dl>
           <textarea
@@ -1252,6 +1933,61 @@ function MoonIcon() {
   )
 }
 
+function FocusIcon() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+  )
+}
+
+// Picks the most-relevant coach question based on context priority:
+// expanded checklist item > active lens > phase default.
+function FocusCoach({ phaseId, lensId, expandedItemKey }) {
+  const itemCoach = expandedItemKey ? ITEM_COACH[expandedItemKey] : null
+  const lensCoach = lensId ? LENS_COACH[`${phaseId}:${lensId}`] : null
+  const phaseCoach = PHASE_COACH[phaseId]
+  const coach = itemCoach || lensCoach || phaseCoach
+  if (!coach) return null
+  const source = itemCoach
+    ? 'Theo checklist đang mở'
+    : lensCoach
+      ? 'Theo lens'
+      : 'Theo phase'
+  return (
+    <div className="px-4 py-2.5 border-b border-slate-200 bg-amber-50/40 dark:border-white/10 dark:bg-amber-500/5 shrink-0">
+      <div className="flex items-baseline justify-between gap-2 mb-1">
+        <h3 className="text-[11px] font-semibold uppercase tracking-wide flex items-center gap-1.5 text-amber-700 dark:text-amber-300">
+          <FocusIcon />
+          Focus Coach
+        </h3>
+        <span className="text-[10px] text-slate-500 dark:text-slate-400 shrink-0">{source}</span>
+      </div>
+      <p className="text-[10px] italic text-slate-500 dark:text-slate-400 mb-1">Câu hỏi tự kiểm lúc này</p>
+      <p className="text-xs font-medium leading-snug text-slate-800 dark:text-slate-100">
+        {coach.question}
+      </p>
+      {coach.hint && (
+        <p className="text-[11px] leading-snug text-slate-600 dark:text-slate-300 mt-1">
+          {coach.hint}
+        </p>
+      )}
+    </div>
+  )
+}
+
 const QUICK_TESTS = [
   {
     title: '3-second test',
@@ -1292,25 +2028,29 @@ const HELP_STEPS = [
   },
   {
     title: 'Dùng checklist bên phải',
-    body: 'Mở từng mục checklist để đọc hướng dẫn. Đánh dấu:',
+    body: 'Mở từng mục để đọc Cần nhìn / Cách nhìn của senior / Lỗi thường gặp / Hướng xử lý. Đánh dấu trạng thái:',
     list: ['Chưa kiểm', 'Đạt', 'Cần sửa'],
   },
   {
     title: 'Dùng Senior Review Lens',
-    body: 'Chọn lens như Story, Composition, Lighting, Material, Depth, Distraction hoặc Premium Mood để soi ảnh theo từng góc nhìn expert.',
+    body: 'Mỗi phase có sẵn các lens (góc nhìn) — ví dụ Hero, Hierarchy, Framing, Material, Reflection, Tone & White Balance, Contrast & Balance. Chọn lens nào bạn muốn soi sâu, rồi cho điểm 1–5.',
+  },
+  {
+    title: 'Theo dõi Focus Coach',
+    body: 'Thẻ vàng "Focus Coach" ở trên cùng sidebar đưa ra một câu hỏi tự kiểm phù hợp với phase, lens hoặc mục checklist bạn đang mở. Đọc câu hỏi đó trước khi đánh giá.',
   },
   {
     title: 'Mark trực tiếp trên ảnh',
     body: 'Dùng Visual Marking để đánh dấu:',
-    list: ['Vùng hero', 'Vùng hỗ trợ', 'Gây nhiễu', 'Cần sửa', 'Ghi chú'],
+    list: ['Vùng hero (điểm chính cần khoe)', 'Vùng hỗ trợ', 'Gây nhiễu', 'Cần sửa', 'Ghi chú'],
   },
   {
     title: 'Ghi note nếu cần',
     body: 'Ghi chú rõ lỗi hoặc hướng xử lý để tự sửa hoặc gửi lại lead review.',
   },
   {
-    title: 'Chỉ mark Ready khi tất cả checklist Đạt',
-    body: 'Ready for Review chỉ nên dùng khi ảnh đã qua đủ checklist và không còn mục Cần sửa.',
+    title: 'Chỉ đánh dấu sẵn sàng khi mọi mục đều Đạt',
+    body: 'Nút "Sẵn sàng review" chỉ bật khi ảnh đã qua đủ checklist và không còn mục Cần sửa.',
   },
 ]
 
@@ -1323,8 +2063,38 @@ const FEEDBACK_QUESTIONS = [
   'Có thao tác nào bị khó click, lag hoặc rối không?',
 ]
 
+const GLOSSARY = [
+  { term: 'hero', def: 'điểm chính cần khoe trong ảnh' },
+  { term: 'mood', def: 'cảm xúc tổng thể của ảnh' },
+  { term: 'visual hierarchy', def: 'thứ tự chính phụ — thứ gì nhìn trước, thứ gì nhìn sau' },
+  { term: 'focal length', def: 'độ rộng hoặc hẹp của ống kính camera' },
+  { term: 'perspective', def: 'cảm giác phối cảnh — độ méo / độ sâu của góc nhìn' },
+  { term: 'foreground', def: 'lớp phía trước ảnh' },
+  { term: 'midground', def: 'lớp giữa ảnh' },
+  { term: 'background', def: 'lớp nền phía sau' },
+  { term: 'contrast', def: 'độ tương phản sáng tối' },
+  { term: 'exposure', def: 'độ sáng tổng thể' },
+  { term: 'saturation', def: 'độ bão hòa màu' },
+  { term: 'highlight', def: 'vùng sáng mạnh trong ảnh' },
+  { term: 'shadow', def: 'vùng tối hoặc bóng đổ' },
+  { term: 'roughness', def: 'độ nhám / bóng của material' },
+  { term: 'albedo', def: 'màu gốc của material' },
+  { term: 'UVW mapping', def: 'cách texture bám lên model' },
+  { term: 'denoise', def: 'khử noise sau render' },
+  { term: 'fireflies', def: 'các đốm sáng lỗi xuất hiện trong render' },
+  { term: 'color grading', def: 'chỉnh màu tổng thể của ảnh' },
+  { term: 'crop', def: 'cắt khung hình' },
+  { term: 'over-processing', def: 'chỉnh ảnh quá tay' },
+  { term: 'vantage point', def: 'vị trí đặt camera trong scene' },
+  { term: 'entourage', def: 'người, xe, cây — các yếu tố làm scene sống' },
+  { term: 'IOR', def: 'chỉ số khúc xạ ánh sáng (Index of Refraction)' },
+  { term: 'AO', def: 'ambient occlusion — bóng tối góc và khe hẹp' },
+  { term: 'HDRI', def: 'ảnh môi trường 360° dùng cho lighting / reflection' },
+]
+
 function HelpPanel({ open, onClose }) {
   const [showFeedback, setShowFeedback] = useState(false)
+  const [showGlossary, setShowGlossary] = useState(false)
 
   useEffect(() => {
     if (!open) return
@@ -1393,6 +2163,46 @@ function HelpPanel({ open, onClose }) {
           <p className="text-[11px] text-slate-500 dark:text-slate-400 italic border-t border-slate-200 dark:border-white/10 pt-3">
             App này không tự đánh giá ảnh bằng AI. Đây là công cụ hỗ trợ artist tự nhìn ảnh có hệ thống hơn.
           </p>
+
+          <div className="border-t border-slate-200 dark:border-white/10 pt-3">
+            <button
+              type="button"
+              onClick={() => setShowGlossary((s) => !s)}
+              className="w-full flex items-center justify-between gap-2 text-left text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition"
+              aria-expanded={showGlossary}
+            >
+              <span>Thuật ngữ nhanh</span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`shrink-0 transition-transform ${showGlossary ? 'rotate-90' : ''}`}
+                aria-hidden="true"
+              >
+                <path d="M4 2l4 4-4 4" />
+              </svg>
+            </button>
+            {showGlossary && (
+              <>
+                <p className="mt-2 text-[11px] text-slate-500 dark:text-slate-400 italic">
+                  Các thuật ngữ tiếng Anh thường dùng trong checklist và lens.
+                </p>
+                <dl className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-[11px] leading-snug text-slate-600 dark:text-slate-300">
+                  {GLOSSARY.map(({ term, def }) => (
+                    <div key={term}>
+                      <dt className="inline font-semibold text-slate-700 dark:text-slate-200">{term}</dt>
+                      <dd className="inline">: {def}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            )}
+          </div>
 
           <div className="border-t border-slate-200 dark:border-white/10 pt-3">
             <button

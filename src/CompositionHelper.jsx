@@ -60,7 +60,7 @@ function loadGuidePrefs() {
 
 const clamp01to100 = (v) => Math.max(0, Math.min(100, v))
 
-export default function ImageReviewHelper({ phase, lens, marking }) {
+export default function ImageReviewHelper({ phase, marking }) {
   const [imageUrl, setImageUrl] = useState(null)
   const [imageDims, setImageDims] = useState(null)
   const [activeGuides, setActiveGuides] = useState(loadGuidePrefs)
@@ -214,7 +214,7 @@ export default function ImageReviewHelper({ phase, lens, marking }) {
         <div className="min-w-0">
           <h2 className="text-sm font-medium text-slate-700 dark:text-slate-200">Image Review Helper</h2>
           <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-            Mở ảnh local để inspect. Ảnh chỉ được mở trong trình duyệt và không được upload.
+            Mở ảnh từ máy để soi. Ảnh chỉ nằm trong trình duyệt, không upload đi đâu.
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -243,38 +243,6 @@ export default function ImageReviewHelper({ phase, lens, marking }) {
             {imageUrl ? 'Đổi ảnh' : 'Mở ảnh'}
           </button>
         </div>
-      </div>
-
-      {/* Lens toolbar */}
-      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-slate-200 dark:border-white/10 shrink-0 flex-wrap">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0">Lens</span>
-        {lens.items.map((l) => {
-          const active = lens.active === l.id
-          return (
-            <button
-              key={l.id}
-              type="button"
-              onClick={() => lens.set(active ? null : l.id)}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded transition ${
-                active
-                  ? 'bg-cyan-600 text-white dark:bg-cyan-500'
-                  : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'
-              }`}
-              title={l.purpose}
-            >
-              {l.label}
-            </button>
-          )
-        })}
-        {lens.active && (
-          <button
-            type="button"
-            onClick={() => lens.set(null)}
-            className="text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition px-1.5"
-          >
-            Bỏ chọn
-          </button>
-        )}
       </div>
 
       {/* Mark toolbar */}
@@ -347,7 +315,7 @@ export default function ImageReviewHelper({ phase, lens, marking }) {
             </svg>
             <p className="text-sm font-medium text-slate-700 dark:text-slate-200">Kéo ảnh vào đây</p>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">hoặc bấm để chọn file</p>
-            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-3">JPG, PNG, WebP — file giữ ở local</p>
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-3">Hỗ trợ JPG, PNG, WebP — ảnh chỉ nằm trong trình duyệt của bạn</p>
 
             <div
               onClick={(e) => e.stopPropagation()}
@@ -357,11 +325,11 @@ export default function ImageReviewHelper({ phase, lens, marking }) {
                 Hướng dẫn nhanh
               </div>
               <ol className="list-decimal list-inside space-y-0.5">
-                <li>Mở ảnh local</li>
-                <li>Chọn phase</li>
-                <li>Dùng checklist và lens để tự QC</li>
-                <li>Mark vùng cần chú ý</li>
-                <li>Đánh dấu Đạt / Cần sửa</li>
+                <li>Mở ảnh từ máy</li>
+                <li>Chọn phase cần kiểm</li>
+                <li>Đọc Focus Coach + checklist + lens</li>
+                <li>Mark vùng cần chú ý lên ảnh</li>
+                <li>Đánh dấu Đạt / Cần sửa từng mục</li>
               </ol>
             </div>
           </div>

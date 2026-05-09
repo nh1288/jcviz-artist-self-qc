@@ -1458,15 +1458,14 @@ export default function App() {
                       type="button"
                       onClick={() => update({ activePhase: phase.id })}
                       title={phase.name}
-                      className={`px-2.5 py-2 text-xs font-medium border-b-2 transition whitespace-nowrap shrink-0 ${
+                      className={`px-2 py-2 text-[11px] font-semibold uppercase tracking-wide border-b-2 transition whitespace-nowrap shrink-0 ${
                         isActive
                           ? 'border-slate-900 text-slate-900 dark:border-slate-100 dark:text-slate-100'
                           : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'
                       }`}
                     >
-                      <span className="mr-1 text-[10px] text-slate-400 dark:text-slate-500">{phase.number}.</span>
                       {PHASE_SHORT_NAMES[phase.id] || phase.name}
-                      <span className="ml-1.5 text-[10px] text-slate-400 dark:text-slate-500 tabular-nums">{phPassed}/{items.length}</span>
+                      <span className="ml-1.5 text-[10px] font-normal normal-case text-slate-400 dark:text-slate-500 tabular-nums">{phPassed}/{items.length}</span>
                       {phFix > 0 && (
                         <span className="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-rose-500" title={`${phFix} mục cần sửa`}></span>
                       )}

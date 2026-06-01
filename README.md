@@ -1,5 +1,9 @@
 # JCVIZ Artist Self-QC
 
+> **JCVIZ-AI workspace** — Class: **JCVIZ-WEB** · package `jcviz-artist-self-qc` · v0.0.1 · Status: Active
+> Path: `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist` · Repo: `nh1288/jcviz-artist-self-qc` (Vercel auto-deploy từ `main`).
+> Doc set: [CLAUDE.md](CLAUDE.md) (Tool Card) · [CHANGELOG.md](CHANGELOG.md) · [VERSION.txt](VERSION.txt) · [DEPLOYMENT_NOTES.md](DEPLOYMENT_NOTES.md).
+
 Artist Self-QC là app nội bộ giúp artist JCVIZ tự kiểm tra ảnh still image trước khi gửi PM hoặc Creative Director review.
 
 App chạy 100% trong trình duyệt — không có backend, không upload ảnh, dữ liệu QC lưu local trong browser của từng artist.

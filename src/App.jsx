@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import ImageReviewHelper from './CompositionHelper.jsx'
+import ImageReviewHelper, { AIReviewMode } from './CompositionHelper.jsx'
 
 const PROJECT_TYPES = [
   { id: 'general', label: 'General' },
@@ -1177,6 +1177,10 @@ export default function App() {
   const [markMode, setMarkMode] = useState('select')
   const [selectedMarkId, setSelectedMarkId] = useState(null)
   const [showHelp, setShowHelp] = useState(false)
+  // AI Review mode — state RIÊNG, tách khỏi Self-QC (không persist, không trộn STORAGE_KEY).
+  const [appMode, setAppMode] = useState('selfqc') // 'selfqc' | 'aireview'
+  const [aiMarks, setAiMarks] = useState([])
+  const [selectedAiMarkId, setSelectedAiMarkId] = useState(null)
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
@@ -1239,6 +1243,19 @@ export default function App() {
       ...s,
       marks: s.marks.map((m) => (m.id === id ? { ...m, note } : m)),
     }))
+
+  // AI Review marks — riêng, ephemeral (không đụng state.marks của Self-QC).
+  const addAiMark = (markData) =>
+    setAiMarks((m) => [
+      ...m,
+      { id: `ai-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, createdAt: Date.now(), ...markData },
+    ])
+  const clearAiMarks = () => { setAiMarks([]); setSelectedAiMarkId(null) }
+  const deleteSelectedAiMark = () => {
+    if (!selectedAiMarkId) return
+    setAiMarks((m) => m.filter((x) => x.id !== selectedAiMarkId))
+    setSelectedAiMarkId(null)
+  }
 
   const setLensScore = (phaseId, lensId, score) =>
     setState((s) => {
@@ -1352,12 +1369,35 @@ export default function App() {
     .filter((m) => m.type === 'pin')
     .sort((a, b) => a.createdAt - b.createdAt)
 
+  // Phase options cho AI Review mode (id + tên + title các item để model soi đúng trọng tâm).
+  const aiPhaseOptions = PHASES.map((p) => ({
+    id: p.id,
+    name: p.name,
+    checklist: getActiveItems(p.id, state.projectType).map((it) => it.title).filter(Boolean),
+  }))
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 dark:bg-[#0B0F14] dark:text-slate-200">
       <header className="bg-white border-b border-slate-200 shrink-0 dark:bg-[#111827] dark:border-white/10">
         <div className="w-full px-4 py-2 flex items-center gap-3 flex-wrap">
-          <div className="flex items-baseline gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             <h1 className="text-sm font-semibold tracking-tight text-slate-800 dark:text-slate-100">Artist Self-QC</h1>
+            <div className="flex items-center gap-0.5 rounded-md border border-slate-200 dark:border-white/15 p-0.5">
+              <button
+                type="button"
+                onClick={() => setAppMode('selfqc')}
+                className={`px-2 py-0.5 text-[11px] font-medium rounded transition ${appMode === 'selfqc' ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'}`}
+              >
+                Self-QC
+              </button>
+              <button
+                type="button"
+                onClick={() => setAppMode('aireview')}
+                className={`px-2 py-0.5 text-[11px] font-medium rounded transition flex items-center gap-1 ${appMode === 'aireview' ? 'bg-violet-600 text-white' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'}`}
+              >
+                AI Review<span className="text-[9px] opacity-70">beta</span>
+              </button>
+            </div>
           </div>
           <div className="flex-1 min-w-[260px] grid grid-cols-2 lg:grid-cols-4 gap-2">
             <input type="text" value={state.project} onChange={(e) => update({ project: e.target.value })} placeholder="Dự án" className={inputCls} />
@@ -1366,35 +1406,39 @@ export default function App() {
             <input type="date" value={state.date} onChange={(e) => update({ date: e.target.value })} className={inputCls} />
           </div>
           <div className="flex items-center gap-2.5 shrink-0">
-            <StatusPill label={status.label} color={status.color} />
-            <div className="hidden md:flex items-center gap-2">
-              <div className="w-24 lg:w-32 h-1.5 rounded-full bg-slate-100 overflow-hidden dark:bg-white/10">
-                <div
-                  className={`h-full transition-all ${
-                    needsFixCount > 0 ? 'bg-amber-500' : allPassed ? 'bg-emerald-500' : 'bg-slate-400 dark:bg-slate-500'
-                  }`}
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <span className="text-xs font-semibold tabular-nums text-slate-700 dark:text-slate-200 w-9 text-right">
-                {progress}%
-              </span>
-            </div>
-            <div className="hidden xl:flex items-center gap-2 text-[11px] tabular-nums">
-              <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>{passedCount}
-              </span>
-              <span className="flex items-center gap-1 text-rose-700 dark:text-rose-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>{needsFixCount}
-              </span>
-              <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></span>{uncheckedCount}
-              </span>
-            </div>
-            {overallAvgLensScore !== null && (
-              <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full border border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-500/40 dark:bg-cyan-500/15 dark:text-cyan-300 tabular-nums">
-                Senior {overallAvgLensScore.toFixed(1)}/5
-              </span>
+            {appMode === 'selfqc' && (
+              <>
+                <StatusPill label={status.label} color={status.color} />
+                <div className="hidden md:flex items-center gap-2">
+                  <div className="w-24 lg:w-32 h-1.5 rounded-full bg-slate-100 overflow-hidden dark:bg-white/10">
+                    <div
+                      className={`h-full transition-all ${
+                        needsFixCount > 0 ? 'bg-amber-500' : allPassed ? 'bg-emerald-500' : 'bg-slate-400 dark:bg-slate-500'
+                      }`}
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                  <span className="text-xs font-semibold tabular-nums text-slate-700 dark:text-slate-200 w-9 text-right">
+                    {progress}%
+                  </span>
+                </div>
+                <div className="hidden xl:flex items-center gap-2 text-[11px] tabular-nums">
+                  <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>{passedCount}
+                  </span>
+                  <span className="flex items-center gap-1 text-rose-700 dark:text-rose-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>{needsFixCount}
+                  </span>
+                  <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"></span>{uncheckedCount}
+                  </span>
+                </div>
+                {overallAvgLensScore !== null && (
+                  <span className="hidden lg:inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full border border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-500/40 dark:bg-cyan-500/15 dark:text-cyan-300 tabular-nums">
+                    Senior {overallAvgLensScore.toFixed(1)}/5
+                  </span>
+                )}
+              </>
             )}
             <button
               onClick={() => setShowHelp(true)}
@@ -1424,7 +1468,8 @@ export default function App() {
       </header>
 
       <main className="w-full px-4 py-2 flex-1 flex flex-col min-h-0 gap-2">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(380px,26vw,480px)] gap-3 flex-1 min-h-0 lg:min-h-[620px]">
+        <div className={appMode === 'selfqc' ? 'flex-1 flex flex-col min-h-0' : 'hidden'}>
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(380px,26vw,480px)] gap-3 h-full min-h-0 lg:min-h-[620px]">
           <div className="min-w-0 min-h-0">
             <ImageReviewHelper
               phase={activePhase}
@@ -1636,6 +1681,21 @@ export default function App() {
               </button>
             </div>
           </aside>
+        </div>
+        </div>
+
+        <div className={appMode === 'aireview' ? 'flex-1 flex flex-col min-h-0' : 'hidden'}>
+          <AIReviewMode
+            phaseOptions={aiPhaseOptions}
+            projectType={state.projectType}
+            markTypes={MARK_TYPES}
+            marks={aiMarks}
+            onAddMark={addAiMark}
+            onClearMarks={clearAiMarks}
+            selectedId={selectedAiMarkId}
+            onSelect={setSelectedAiMarkId}
+            onDeleteSelected={deleteSelectedAiMark}
+          />
         </div>
       </main>
 

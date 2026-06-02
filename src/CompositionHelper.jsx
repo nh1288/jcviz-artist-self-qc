@@ -597,8 +597,8 @@ const aiInputCls =
 
 // AI pre-check: gọi vision LLM qua gateway LAN, hiện findings, cho phép tạo mark từ finding.
 // Additive — không đụng checklist/marks/lens. Ảnh chỉ rời browser khi artist chủ động bấm.
-function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes }) {
-  const [open, setOpen] = useState(false)
+function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent = false }) {
+  const [open, setOpen] = useState(Boolean(prominent))
   const [showConfig, setShowConfig] = useState(false)
   const [config, setConfig] = useState(loadAiConfig)
   const [loading, setLoading] = useState(false)
@@ -671,7 +671,7 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes }) {
       <div className="flex items-center justify-between gap-2 px-3 py-1.5">
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => { if (!prominent) setOpen((o) => !o) }}
           className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
@@ -689,13 +689,15 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes }) {
           >
             Cấu hình
           </button>
-          <button
-            type="button"
-            onClick={() => setOpen((o) => !o)}
-            className="text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition"
-          >
-            {open ? 'Ẩn' : 'Mở'}
-          </button>
+          {!prominent && (
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              className="text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition"
+            >
+              {open ? 'Ẩn' : 'Mở'}
+            </button>
+          )}
         </div>
       </div>
 
@@ -815,6 +817,150 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes }) {
           )}
         </div>
       )}
+    </div>
+  )
+}
+
+// AI Review mode — chế độ riêng (additive). Ảnh + marks RIÊNG (tách khỏi Self-QC),
+// findings là view chính. Reuse MarkOverlay + AIPrecheckPanel(prominent) + aiPrecheck.js.
+export function AIReviewMode({
+  phaseOptions, projectType, markTypes,
+  marks, onAddMark, onClearMarks, selectedId, onSelect, onDeleteSelected,
+}) {
+  const [imageUrl, setImageUrl] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [selectedPhaseId, setSelectedPhaseId] = useState(phaseOptions[0]?.id || 'storytelling')
+  const inputRef = useRef(null)
+  const objectUrlRef = useRef(null)
+
+  useEffect(() => () => {
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current)
+  }, [])
+
+  const handleFile = (file) => {
+    if (!file || !file.type.startsWith('image/')) return
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current)
+    const url = URL.createObjectURL(file)
+    objectUrlRef.current = url
+    setImageUrl(url)
+  }
+  const clearImage = () => {
+    if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current)
+    objectUrlRef.current = null
+    setImageUrl(null)
+  }
+  const onDrop = (e) => {
+    e.preventDefault(); setIsDragging(false)
+    const f = e.dataTransfer?.files?.[0]; if (f) handleFile(f)
+  }
+
+  const phase = phaseOptions.find((p) => p.id === selectedPhaseId) || phaseOptions[0]
+  const aiContext = { phaseId: selectedPhaseId, projectType, checklist: phase?.checklist || [] }
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(360px,30vw,460px)] gap-3 h-full min-h-0 lg:min-h-[620px]">
+      {/* Left: image + AI-created marks */}
+      <section className="bg-white border border-slate-200 rounded-lg h-full flex flex-col overflow-hidden dark:bg-[#111827] dark:border-white/10 min-h-0">
+        <div className="flex items-center justify-between gap-3 px-4 py-2 border-b border-slate-200 shrink-0 dark:border-white/10">
+          <div className="min-w-0">
+            <h2 className="text-sm font-medium text-slate-700 dark:text-slate-200">AI Review <span className="text-[10px] font-normal text-violet-500">(beta)</span></h2>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">Gợi ý từ AI — không thay QC người. Ảnh chỉ gửi khi bạn bấm Review.</p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            {marks.length > 0 && (
+              <>
+                <button onClick={onDeleteSelected} disabled={!selectedId} className="px-2 py-1 text-[11px] text-rose-600 hover:bg-rose-50 disabled:text-slate-400 disabled:hover:bg-transparent dark:text-rose-400 dark:hover:bg-rose-500/10 dark:disabled:text-slate-500 transition rounded">Xóa mark chọn</button>
+                <button onClick={onClearMarks} className="px-2 py-1 text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition rounded">Xóa marks</button>
+              </>
+            )}
+            {imageUrl && (
+              <button onClick={clearImage} className="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition">Xóa ảnh</button>
+            )}
+            <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => { handleFile(e.target.files?.[0]); e.target.value = '' }} />
+            <button onClick={() => inputRef.current?.click()} className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-50 text-slate-700 dark:border-white/15 dark:text-slate-200 dark:hover:bg-white/10 transition">{imageUrl ? 'Đổi ảnh' : 'Mở ảnh'}</button>
+          </div>
+        </div>
+
+        {!imageUrl ? (
+          <div className="flex-1 min-h-0 p-3">
+            <div
+              onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
+              onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setIsDragging(false) }}
+              onDrop={onDrop}
+              onClick={() => inputRef.current?.click()}
+              className={`h-full flex flex-col items-center justify-center text-center border-2 border-dashed rounded-lg cursor-pointer transition select-none ${isDragging ? 'border-violet-500 bg-violet-50 dark:bg-violet-500/10' : 'border-slate-300 hover:border-slate-400 hover:bg-slate-50 dark:border-white/15 dark:hover:border-white/30 dark:hover:bg-white/5'}`}
+            >
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-200">Kéo ảnh vào đây để AI review</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">hoặc bấm để chọn file</p>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-3">Ảnh chỉ nằm trong trình duyệt cho tới khi bạn bấm Review</p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 min-h-0 p-3">
+            <div
+              className="relative bg-[#080A0F] overflow-hidden h-full flex items-center justify-center rounded-lg"
+              onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
+              onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setIsDragging(false) }}
+              onDrop={onDrop}
+            >
+              <img src={imageUrl} alt="" draggable={false} className="absolute inset-0 w-full h-full object-contain z-0 select-none" />
+              <div className="absolute inset-0 z-20" onClick={() => onSelect(null)}>
+                {marks.map((mark) => (
+                  <MarkOverlay
+                    key={mark.id}
+                    mark={mark}
+                    type={markTypes.find((t) => t.id === mark.type)}
+                    isSelected={selectedId === mark.id}
+                    pinNumber={null}
+                    onSelect={onSelect}
+                    selectable
+                  />
+                ))}
+              </div>
+              {isDragging && (
+                <div className="absolute inset-0 z-50 bg-slate-900/85 flex items-center justify-center text-white text-sm font-medium pointer-events-none">Thả để đổi ảnh</div>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Right: phase selector + findings (AIPrecheckPanel prominent) */}
+      <aside className="bg-white border border-slate-200 rounded-lg flex flex-col min-h-0 overflow-hidden dark:bg-[#111827] dark:border-white/10">
+        <div className="px-4 py-2.5 border-b border-slate-200 shrink-0 dark:border-white/10 bg-violet-50/40 dark:bg-violet-500/5">
+          <h3 className="text-sm font-semibold text-violet-700 dark:text-violet-300">AI Review (beta)</h3>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug mt-0.5">Gợi ý của AI để soi nhanh — <strong>không thay thế QC của người</strong>. Bạn vẫn quyết cuối.</p>
+        </div>
+
+        <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10 shrink-0">
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Phase</div>
+          <div className="flex flex-wrap gap-1">
+            {phaseOptions.map((p) => {
+              const active = selectedPhaseId === p.id
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setSelectedPhaseId(p.id)}
+                  className={`px-2 py-1 text-[11px] font-medium rounded transition ${active ? 'bg-violet-600 text-white' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'}`}
+                >
+                  {p.name}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto min-h-0">
+          <AIPrecheckPanel
+            prominent
+            imageUrl={imageUrl}
+            aiContext={aiContext}
+            onAddMark={onAddMark}
+            markTypes={markTypes}
+          />
+        </div>
+      </aside>
     </div>
   )
 }

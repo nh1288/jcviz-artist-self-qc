@@ -12,7 +12,7 @@ See `README.md` for full feature list and `DEPLOYMENT_NOTES.md` for deploy detai
 - **Path:** `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist`
 - **Purpose:** App nội bộ giúp artist JCVIZ tự QC still image (checklist theo phase, Senior
   Review Lens, visual marking + composition guides) trước khi gửi PM / Creative Director.
-- **Version:** 0.1.0
+- **Version:** 0.2.0
 
 ### Stack
 - **Vite 6** + **React 18** + **Tailwind CSS 4** (dark mode = class strategy).
@@ -25,6 +25,10 @@ See `README.md` for full feature list and `DEPLOYMENT_NOTES.md` for deploy detai
 - Entry: `index.html` → `src/main.jsx` → `src/App.jsx` (toàn bộ app + data PHASES/LENSES/
   MARK_TYPES). Image helper: `src/CompositionHelper.jsx`. AI pre-check: `src/aiPrecheck.js`
   (logic) + panel trong `src/CompositionHelper.jsx`. Contract: `docs/LLM_QC_INTEGRATION.md`.
+- **Mode (v0.2.0):** `appMode` ở `App.jsx` toggle Self-QC ↔ AI Review (`hidden` toggle, không
+  remount). AI Review = component `AIReviewMode` (export từ `CompositionHelper.jsx`), reuse
+  `AIPrecheckPanel` (prop `prominent`) + `MarkOverlay`. State AI Review RIÊNG: `aiMarks`
+  (ephemeral, KHÔNG persist, KHÔNG trộn `STORAGE_KEY`/`state.marks`).
 
 ### Scope-lock
 - Work **only** inside `JCVIZ-WEB\qc-checklist`. Đọc phần còn lại của `D:\JCVIZ-AI` để lấy

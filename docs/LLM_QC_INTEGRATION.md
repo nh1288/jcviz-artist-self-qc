@@ -67,7 +67,8 @@ Header: `Authorization: Bearer <api_key>` (dùng chung key với `/convert`).
       "severity": "high",
       "area": "hero",
       "observation": "Tán cây foreground trùm lên lối vào chính, giảm lực hút của hero.",
-      "suggestion": "Dời/tỉa cây hoặc đổi vantage point để lộ entrance."
+      "suggestion": "Dời/tỉa cây hoặc đổi vantage point để lộ entrance.",
+      "bbox": { "x": 30, "y": 35, "w": 40, "h": 35 }
     }
   ],
   "ready_hint": false
@@ -75,6 +76,10 @@ Header: `Authorization: Bearer <api_key>` (dùng chung key với `/convert`).
 ```
 - `severity`: `high | medium | low`.
 - `area`: `hero | composition | lighting | material | render | post | distraction`.
+- `bbox`: vị trí vùng lỗi theo **% kích thước ảnh** `{x,y,w,h}` (x,y = góc trên-trái; 0-100).
+  Client dùng để đặt mark đúng chỗ. Lỗi tổng thể không khu trú → `{0,0,0,0}` (client bỏ qua,
+  đặt mark vị trí mặc định). Lưu ý: grounding của model 7B **coarse** — đúng khu vực, không
+  pixel-precise; coi như gợi ý "nhìn vào đây".
 - `ready_hint`: gợi ý của model xem ảnh "đủ sạch để review" chưa (KHÔNG ghi đè
   `readyForReview` thật của app — chỉ là gợi ý tham khảo).
 

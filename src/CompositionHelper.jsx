@@ -670,11 +670,19 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
   const handleAddMark = (finding, idx) => {
     const mapped = mapAreaToMarkType(finding.area)
     const typeId = markTypes?.some((t) => t.id === mapped) ? mapped : 'fix'
-    // Model không trả toạ độ → đặt mark mặc định, lệch nhẹ theo idx để không chồng khít.
-    const x = Math.min(70, 32 + (idx % 3) * 10)
-    const y = Math.min(70, 26 + (Math.floor(idx / 3) % 3) * 12)
+    const bb = finding.bbox
+    let xPercent, yPercent, widthPercent, heightPercent
+    if (bb && bb.w > 0 && bb.h > 0) {
+      // AI khoanh được vùng → đặt mark ĐÚNG vị trí lỗi.
+      xPercent = bb.x; yPercent = bb.y; widthPercent = bb.w; heightPercent = bb.h
+    } else {
+      // Không có vị trí → đặt mặc định, lệch nhẹ theo idx để không chồng khít.
+      xPercent = Math.min(70, 32 + (idx % 3) * 10)
+      yPercent = Math.min(70, 26 + (Math.floor(idx / 3) % 3) * 12)
+      widthPercent = 26; heightPercent = 20
+    }
     const note = `[AI] ${finding.title || ''}${finding.suggestion ? ' — ' + finding.suggestion : ''}`.trim()
-    onAddMark({ type: typeId, xPercent: x, yPercent: y, widthPercent: 26, heightPercent: 20, note })
+    onAddMark({ type: typeId, xPercent, yPercent, widthPercent, heightPercent, note })
     setByPhase((prev) => {
       const c = prev[phaseId] || {}
       const added = new Set(c.added || [])
@@ -682,6 +690,17 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
       return { ...prev, [phaseId]: { ...c, added } }
     })
   }
+
+  // Đánh dấu tất cả finding CÓ VỊ TRÍ (bbox) chưa được tạo mark.
+  const handleMarkAllLocated = () => {
+    if (!result) return
+    result.findings.forEach((f, i) => {
+      if (!addedIdx.has(i) && f.bbox && f.bbox.w > 0 && f.bbox.h > 0) handleAddMark(f, i)
+    })
+  }
+  const locatedCount = result
+    ? result.findings.filter((f) => f.bbox && f.bbox.w > 0 && f.bbox.h > 0).length
+    : 0
 
   const sortedFindings = result
     ? result.findings
@@ -843,6 +862,16 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
                 </div>
               )}
 
+              {locatedCount > 0 && (
+                <button
+                  type="button"
+                  onClick={handleMarkAllLocated}
+                  className="w-full px-2 py-1 text-[11px] font-medium rounded border border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-500/40 dark:text-violet-300 dark:hover:bg-violet-500/10 transition"
+                >
+                  📍 Đánh dấu tất cả {locatedCount} vùng AI khoanh được lên ảnh
+                </button>
+              )}
+
               {sortedFindings.length === 0 ? (
                 <p className="text-[11px] text-slate-400 dark:text-slate-500 text-center py-2">
                   AI không nêu finding nào cho phase này.
@@ -855,6 +884,9 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
                         {SEVERITY_LABEL[f.severity] || f.severity}
                       </span>
                       <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-400">{f.area}</span>
+                      {f.bbox && f.bbox.w > 0 && f.bbox.h > 0 && (
+                        <span title="AI khoanh được vùng lỗi trên ảnh" className="text-[9px]">📍</span>
+                      )}
                       <span className="text-[11px] font-medium text-slate-800 dark:text-slate-100">{f.title}</span>
                     </div>
                     {f.observation && (
@@ -872,7 +904,7 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
                       disabled={addedIdx.has(i)}
                       className="px-2 py-0.5 text-[10px] font-medium rounded border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:text-emerald-600 disabled:border-emerald-200 disabled:hover:bg-transparent dark:border-white/15 dark:text-slate-300 dark:hover:bg-white/10 dark:disabled:text-emerald-400 transition"
                     >
-                      {addedIdx.has(i) ? '✓ Đã tạo mark' : 'Tạo mark'}
+                      {addedIdx.has(i) ? '✓ Đã tạo mark' : (f.bbox && f.bbox.w > 0 && f.bbox.h > 0 ? '📍 Tạo mark đúng vị trí' : 'Tạo mark')}
                     </button>
                   </div>
                 ))

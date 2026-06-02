@@ -1,6 +1,6 @@
 # JCVIZ Artist Self-QC
 
-> **JCVIZ-AI workspace** — Class: **JCVIZ-WEB** · package `jcviz-artist-self-qc` · v0.3.1 · Status: Active
+> **JCVIZ-AI workspace** — Class: **JCVIZ-WEB** · package `jcviz-artist-self-qc` · v0.4.0 · Status: Active
 > Path: `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist` · Repo: `nh1288/jcviz-artist-self-qc` (Vercel auto-deploy từ `main`).
 > Doc set: [CLAUDE.md](CLAUDE.md) (Tool Card) · [CHANGELOG.md](CHANGELOG.md) · [VERSION.txt](VERSION.txt) · [DEPLOYMENT_NOTES.md](DEPLOYMENT_NOTES.md).
 

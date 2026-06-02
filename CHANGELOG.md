@@ -2,6 +2,18 @@
 
 All notable changes to the QC Checklist workspace tool.
 
+## [0.4.0] — 2026-06-02
+
+### Added — AI annotate đúng vị trí trên ảnh (visual grounding)
+- Model trả thêm **`bbox`** (vị trí vùng lỗi theo % ảnh `{x,y,w,h}`) cho mỗi finding. Client
+  **đặt mark đúng vùng AI khoanh** thay vì vị trí mặc định.
+- Nút **"📍 Đánh dấu tất cả N vùng AI khoanh được"** + chỉ báo 📍 trên finding có vị trí +
+  nhãn nút "📍 Tạo mark đúng vị trí". Finding không khu trú được → fallback vị trí mặc định.
+- ⚠️ Spike: grounding của `qwen2.5vl:7b` **coarse** (đúng khu vực, không pixel-precise) — coi
+  như gợi ý "nhìn vào đây". Lỗi tổng thể (mood/grade) → model trả `{0,0,0,0}` hoặc full-ảnh.
+- Gateway-side (`09. Prompt Master/server`, cross-tool): thêm `bbox` vào QC schema + system
+  prompt yêu cầu khoanh vùng theo %. Đã verified e2e: mark rơi đúng bbox model trả.
+
 ## [0.3.1] — 2026-06-02
 
 ### Fixed

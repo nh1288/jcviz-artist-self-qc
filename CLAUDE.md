@@ -12,7 +12,7 @@ See `README.md` for full feature list and `DEPLOYMENT_NOTES.md` for deploy detai
 - **Path:** `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist`
 - **Purpose:** App nội bộ giúp artist JCVIZ tự QC still image (checklist theo phase, Senior
   Review Lens, visual marking + composition guides) trước khi gửi PM / Creative Director.
-- **Version:** 0.2.0
+- **Version:** 0.2.1
 
 ### Stack
 - **Vite 6** + **React 18** + **Tailwind CSS 4** (dark mode = class strategy).

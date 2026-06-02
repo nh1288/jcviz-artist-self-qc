@@ -2,6 +2,15 @@
 
 All notable changes to the QC Checklist workspace tool.
 
+## [0.2.1] — 2026-06-02
+
+### Changed
+- **Default vision model**: `DEFAULT_MODEL` trong `src/aiPrecheck.js` đổi
+  `llama3.2-vision:11b` → **`qwen2.5vl:7b`** (model đã smoke-test + chọn: bám JSON schema tốt,
+  nhẹ VRAM, phase-aware). Tránh lỗi 400/502 cho người dùng lần đầu khi gateway LAN chạy
+  `SC_VISION_MODEL=qwen2.5vl:7b`. Placeholder ô MODEL tự đổi theo (dùng chung biến).
+- Đồng bộ `docs/LLM_QC_INTEGRATION.md` sang `qwen2.5vl:7b` + cập nhật checklist trạng thái.
+
 ## [0.2.0] — 2026-06-02
 
 ### Added — chế độ "AI Review" (tab/mode riêng, additive)

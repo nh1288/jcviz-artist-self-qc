@@ -16,15 +16,16 @@ QC trở thành **một client nữa** của gateway LAN dùng chung — đúng 
 
 ```
 [ QC Checklist (browser SPA) ] --HTTP(LAN)--> [ Gateway :8765 ] --localhost--> [ Ollama :11434  vision model ]
-        fetch() POST /qc-analyze         API-key + CORS + semaphore + size-guard      llama3.2-vision (mặc định)
+        fetch() POST /qc-analyze         API-key + CORS + semaphore + size-guard      qwen2.5vl:7b (mặc định)
 ```
 
 QC **không** dựng backend; chỉ gọi service có sẵn → vẫn giữ tinh thần "static, no backend".
 
 ## 2. Hai thay đổi so với hiện trạng gateway
 
-1. **Vision model**: box hiện chỉ có `qwen3.5:9b` (text). Phải `ollama pull llama3.2-vision:11b`
-   (~7.8 GB). Gateway whitelist thêm model này.
+1. **Vision model**: box hiện chỉ có `qwen3.5:9b` (text). Đã `ollama pull qwen2.5vl:7b`
+   (~6 GB — model vision đã chọn sau smoke-test: bám JSON schema tốt, nhẹ VRAM, phase-aware).
+   Gateway whitelist thêm model này qua `SC_VISION_MODEL`.
 2. **CORS**: gateway cũ chỉ phục vụ client desktop Python (không cần CORS). Browser gọi
    được thì gateway phải bật `CORSMiddleware`. Đã thêm, cấu hình qua `SC_CORS_ORIGINS`.
 
@@ -46,7 +47,7 @@ Header: `Authorization: Bearer <api_key>` (dùng chung key với `/convert`).
   "phase": "camera",
   "project_type": "villa",
   "checklist": ["Góc camera khớp hướng đã duyệt", "Bố cục cân bằng"],
-  "model": "llama3.2-vision:11b"
+  "model": "qwen2.5vl:7b"
 }
 ```
 - `image` (bắt buộc): base64 JPEG/PNG. Cap kích thước qua `SC_MAX_IMAGE_BYTES` (mặc định 12 MB
@@ -100,10 +101,10 @@ whitelist · `413` ảnh quá lớn · `502` analyze thất bại · `503` chưa
 - [x] Gateway: `config.py` (vision model + CORS + size-guard), `qc_analyze.py`,
       `qc_system_prompt.txt`, `/qc-analyze` + CORS trong `app.py`. *(additive, không đụng
       `/convert`)*
-- [ ] `ollama pull llama3.2-vision:11b` trên box 4090.
-- [ ] Smoke-test gateway: `/health`, `/qc-analyze` với 1 ảnh thật.
-- [ ] QC client: module gọi API + UI panel findings + consent + tạo-mark-từ-finding.
-- [ ] Test end-to-end + fallback offline.
+- [x] `ollama pull qwen2.5vl:7b` trên box 4090 (model vision đã chọn — default của client).
+- [x] Smoke-test gateway: `/health`, `/qc-analyze` 5 phase với ảnh thật (schema 100%, ~2–4s warm).
+- [x] QC client: `src/aiPrecheck.js` + panel findings + consent + tạo-mark-từ-finding (v0.1.0).
+- [x] Mode "AI Review" riêng (v0.2.0) + e2e thật + fallback offline.
 
 ## 7. Nguồn tham khảo
 

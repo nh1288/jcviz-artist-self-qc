@@ -4,7 +4,7 @@
 
 // Config AI lưu RIÊNG, không trộn vào STORAGE_KEY checklist.
 export const AI_CONFIG_KEY = 'jcviz-self-qc-ai-v1'
-export const DEFAULT_MODEL = 'llama3.2-vision:11b'
+export const DEFAULT_MODEL = 'qwen2.5vl:7b'
 
 // Cap cạnh dài ảnh trước khi gửi — vision model nào cũng downscale; tránh 413 + nhanh hơn.
 export const MAX_EDGE = 1568

@@ -1,4 +1,4 @@
-0.2.2
+0.3.0
 Status: Active
 
 Tool: QC Checklist (JCVIZ Artist Self-QC) — package name: jcviz-artist-self-qc

@@ -2,6 +2,20 @@
 
 All notable changes to the QC Checklist workspace tool.
 
+## [0.3.0] — 2026-06-02
+
+### Added
+- **Review tổng thể cả 5 phase**: nút "★ Review tổng thể cả 5 phase" — encode ảnh 1 lần rồi
+  chạy **tuần tự** cả 5 phase (tránh quá tải VRAM box) + bảng **Tổng quan 5 phase** (số điểm
+  cần xem mỗi phase, bấm để nhảy phase).
+- **Giải pháp nổi bật**: mỗi finding hiện box "💡 Giải pháp" (xanh) tách khỏi observation —
+  dùng field `suggestion` sẵn có, làm rõ hướng điều chỉnh cho artist.
+
+### Fixed
+- **Đổi tab không mất nhận xét**: lưu kết quả **theo từng phase** (`byPhase`) trong
+  `AIPrecheckPanel` thay vì 1 state chung. Đổi phase rồi quay lại → findings cũ còn nguyên;
+  phase chưa chạy = trống. (Sửa đúng hành vi mong muốn; thay cho cách clear-toàn-bộ ở v0.2.2.)
+
 ## [0.2.2] — 2026-06-02
 
 ### Fixed / Changed — UX mode AI Review

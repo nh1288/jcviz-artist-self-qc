@@ -589,6 +589,7 @@ const SEVERITY_STYLE = {
   low: 'bg-slate-500/15 text-slate-600 border-slate-400/30 dark:text-slate-300',
 }
 const SEVERITY_LABEL = { high: 'Cao', medium: 'Vừa', low: 'Thấp' }
+const EMPTY_SET = new Set()
 
 const aiInputCls =
   'w-full px-2 py-1 text-[11px] rounded border border-slate-200 bg-white placeholder:text-slate-400 ' +
@@ -597,24 +598,24 @@ const aiInputCls =
 
 // AI pre-check: gọi vision LLM qua gateway LAN, hiện findings, cho phép tạo mark từ finding.
 // Additive — không đụng checklist/marks/lens. Ảnh chỉ rời browser khi artist chủ động bấm.
-function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent = false }) {
+function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent = false, allPhases = null, onSelectPhase = null }) {
   const [open, setOpen] = useState(Boolean(prominent))
   const [showConfig, setShowConfig] = useState(false)
   const [config, setConfig] = useState(loadAiConfig)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [result, setResult] = useState(null)
-  const [meta, setMeta] = useState(null)
-  const [addedIdx, setAddedIdx] = useState(() => new Set())
+  // Kết quả lưu THEO TỪNG PHASE → đổi tab không mất; phase chưa chạy = trống.
+  const [byPhase, setByPhase] = useState({}) // { [phaseId]: {result, meta, error, added:Set} }
+  const [runningPhases, setRunningPhases] = useState(() => new Set())
 
-  // Đổi phase → xoá kết quả cũ (findings theo từng phase). Phase nào chưa chạy → trống.
-  useEffect(() => {
-    setResult(null); setError(null); setMeta(null); setAddedIdx(new Set())
-  }, [aiContext?.phaseId])
+  const phaseId = aiContext?.phaseId
+  const cur = byPhase[phaseId] || {}
+  const result = cur.result || null
+  const meta = cur.meta || null
+  const error = cur.error || null
+  const addedIdx = cur.added || EMPTY_SET
+  const loading = runningPhases.has(phaseId)
+  const runAllInProgress = runningPhases.size > 0
 
   const configured = Boolean(config.gatewayUrl.trim() && config.apiKey.trim())
-  // Cần ảnh để chạy; KHÔNG chặn khi chưa cấu hình — runPrecheck sẽ trả lỗi thân thiện
-  // ("chưa cấu hình URL/key") để artist thấy phản hồi thay vì nút chết.
   const canRun = Boolean(imageUrl) && !loading
 
   const handleSaveConfig = () => {
@@ -623,34 +624,46 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
     setShowConfig(false)
   }
 
+  // Chạy 1 phase, lưu kết quả vào byPhase[pid]. base64 truyền vào để run-all encode 1 lần.
+  const runOne = async (pid, checklist, base64) => {
+    setRunningPhases((prev) => new Set(prev).add(pid))
+    setByPhase((prev) => ({ ...prev, [pid]: { ...(prev[pid] || {}), error: null } }))
+    try {
+      const res = await runPrecheck({
+        gatewayUrl: config.gatewayUrl, apiKey: config.apiKey, model: config.model,
+        base64, phase: pid, projectType: aiContext?.projectType, checklist,
+      })
+      setByPhase((prev) => ({
+        ...prev,
+        [pid]: res.ok
+          ? { result: res.data, meta: res.meta, error: null, added: new Set() }
+          : { result: null, meta: null, error: res.error, added: new Set() },
+      }))
+    } catch (e) {
+      setByPhase((prev) => ({ ...prev, [pid]: { result: null, meta: null, error: e?.message || 'Lỗi xử lý ảnh.', added: new Set() } }))
+    } finally {
+      setRunningPhases((prev) => { const n = new Set(prev); n.delete(pid); return n })
+    }
+  }
+
   const handleRun = async () => {
     if (!imageUrl) return
-    setLoading(true)
-    setError(null)
-    setResult(null)
-    setMeta(null)
-    setAddedIdx(new Set())
     try {
       const base64 = await encodeImageForAi(imageUrl)
-      const res = await runPrecheck({
-        gatewayUrl: config.gatewayUrl,
-        apiKey: config.apiKey,
-        model: config.model,
-        base64,
-        phase: aiContext?.phaseId,
-        projectType: aiContext?.projectType,
-        checklist: aiContext?.checklist,
-      })
-      if (res.ok) {
-        setResult(res.data)
-        setMeta(res.meta)
-      } else {
-        setError(res.error)
-      }
+      await runOne(phaseId, aiContext?.checklist, base64)
     } catch (e) {
-      setError(e?.message || 'Lỗi không xác định khi xử lý ảnh.')
-    } finally {
-      setLoading(false)
+      setByPhase((prev) => ({ ...prev, [phaseId]: { result: null, meta: null, error: e?.message || 'Lỗi xử lý ảnh.', added: new Set() } }))
+    }
+  }
+
+  // Review tổng thể: encode 1 lần, chạy TUẦN TỰ 5 phase (tránh quá tải VRAM box).
+  const handleRunAll = async () => {
+    if (!imageUrl || !allPhases?.length) return
+    let base64
+    try { base64 = await encodeImageForAi(imageUrl) }
+    catch (e) { setByPhase((prev) => ({ ...prev, [phaseId]: { result: null, meta: null, error: e?.message || 'Lỗi xử lý ảnh.', added: new Set() } })); return }
+    for (const p of allPhases) {
+      await runOne(p.id, p.checklist, base64)
     }
   }
 
@@ -662,7 +675,12 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
     const y = Math.min(70, 26 + (Math.floor(idx / 3) % 3) * 12)
     const note = `[AI] ${finding.title || ''}${finding.suggestion ? ' — ' + finding.suggestion : ''}`.trim()
     onAddMark({ type: typeId, xPercent: x, yPercent: y, widthPercent: 26, heightPercent: 20, note })
-    setAddedIdx((prev) => new Set(prev).add(idx))
+    setByPhase((prev) => {
+      const c = prev[phaseId] || {}
+      const added = new Set(c.added || [])
+      added.add(idx)
+      return { ...prev, [phaseId]: { ...c, added } }
+    })
   }
 
   const sortedFindings = result
@@ -754,12 +772,56 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
             title={!imageUrl ? 'Mở ảnh trước' : (!configured ? 'Cấu hình gateway trước' : '')}
             className="w-full px-3 py-1.5 text-[11px] font-medium rounded bg-violet-600 text-white hover:bg-violet-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed dark:disabled:bg-white/10 dark:disabled:text-slate-500 transition"
           >
-            {loading ? 'Đang phân tích…' : 'Chạy AI pre-check (gửi ảnh sang box LAN nội bộ)'}
+            {loading ? 'Đang phân tích…' : (allPhases ? 'Review phase này' : 'Chạy AI pre-check (gửi ảnh sang box LAN nội bộ)')}
           </button>
+
+          {allPhases && (
+            <button
+              type="button"
+              onClick={handleRunAll}
+              disabled={!imageUrl || runAllInProgress}
+              className="w-full px-3 py-1.5 text-[11px] font-medium rounded border border-violet-300 text-violet-700 hover:bg-violet-50 disabled:opacity-50 disabled:cursor-not-allowed dark:border-violet-500/40 dark:text-violet-300 dark:hover:bg-violet-500/10 transition"
+            >
+              {runAllInProgress
+                ? `Đang review… (${allPhases.filter((p) => byPhase[p.id]?.result || byPhase[p.id]?.error).length}/${allPhases.length})`
+                : '★ Review tổng thể cả 5 phase'}
+            </button>
+          )}
+
           <p className="text-[10px] leading-snug text-slate-400 dark:text-slate-500">
-            Ảnh sẽ rời trình duyệt sang box LAN nội bộ (không cloud, không lưu). Chỉ gửi khi bạn bấm nút trên.
+            Ảnh sẽ rời trình duyệt sang box LAN nội bộ (không cloud, không lưu). Chỉ gửi khi bạn bấm.
             Kết quả chỉ là gợi ý — bạn vẫn là người quyết cuối.
           </p>
+
+          {allPhases && allPhases.some((p) => byPhase[p.id]?.result || byPhase[p.id]?.error) && (
+            <div className="p-2 rounded bg-slate-50 border border-slate-200 dark:bg-white/5 dark:border-white/10">
+              <div className="text-[9px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Tổng quan 5 phase</div>
+              <div className="flex flex-col gap-0.5">
+                {allPhases.map((p) => {
+                  const b = byPhase[p.id]
+                  const n = b?.result?.findings?.length
+                  const running = runningPhases.has(p.id)
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => onSelectPhase && onSelectPhase(p.id)}
+                      className={`flex items-center justify-between text-[11px] px-1.5 py-0.5 rounded text-left transition ${p.id === phaseId ? 'bg-violet-100 dark:bg-violet-500/20' : 'hover:bg-slate-100 dark:hover:bg-white/10'}`}
+                    >
+                      <span className="text-slate-700 dark:text-slate-200">{p.short || p.name}</span>
+                      <span className="text-[10px] tabular-nums">
+                        {running ? <span className="text-violet-500">đang chạy…</span>
+                          : b?.error ? <span className="text-rose-500">lỗi</span>
+                          : typeof n === 'number'
+                            ? <span className={n > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'}>{n > 0 ? `${n} điểm cần xem` : 'ổn'}</span>
+                            : <span className="text-slate-400">chưa chạy</span>}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           {error && (
             <div className="p-2 rounded text-[11px] bg-rose-50 border border-rose-200 text-rose-700 dark:bg-rose-500/10 dark:border-rose-500/30 dark:text-rose-300">
@@ -799,7 +861,10 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
                       <p className="text-[11px] leading-snug text-slate-600 dark:text-slate-300">{f.observation}</p>
                     )}
                     {f.suggestion && (
-                      <p className="text-[11px] leading-snug text-slate-500 dark:text-slate-400">→ {f.suggestion}</p>
+                      <div className="mt-1 p-1.5 rounded bg-emerald-50 border border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/30">
+                        <span className="text-[9px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">💡 Giải pháp</span>
+                        <p className="text-[11px] leading-snug text-emerald-800 dark:text-emerald-200">{f.suggestion}</p>
+                      </div>
                     )}
                     <button
                       type="button"
@@ -964,6 +1029,8 @@ export function AIReviewMode({
             aiContext={aiContext}
             onAddMark={onAddMark}
             markTypes={markTypes}
+            allPhases={phaseOptions}
+            onSelectPhase={setSelectedPhaseId}
           />
         </div>
       </aside>

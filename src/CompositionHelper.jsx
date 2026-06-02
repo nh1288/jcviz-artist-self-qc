@@ -607,6 +607,11 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
   const [meta, setMeta] = useState(null)
   const [addedIdx, setAddedIdx] = useState(() => new Set())
 
+  // Đổi phase → xoá kết quả cũ (findings theo từng phase). Phase nào chưa chạy → trống.
+  useEffect(() => {
+    setResult(null); setError(null); setMeta(null); setAddedIdx(new Set())
+  }, [aiContext?.phaseId])
+
   const configured = Boolean(config.gatewayUrl.trim() && config.apiKey.trim())
   // Cần ảnh để chạy; KHÔNG chặn khi chưa cấu hình — runPrecheck sẽ trả lỗi thân thiện
   // ("chưa cấu hình URL/key") để artist thấy phản hồi thay vì nút chết.
@@ -896,7 +901,7 @@ export function AIReviewMode({
             </div>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 p-3">
+          <div className="flex-1 min-h-0 p-1.5">
             <div
               className="relative bg-[#080A0F] overflow-hidden h-full flex items-center justify-center rounded-lg"
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
@@ -934,17 +939,18 @@ export function AIReviewMode({
 
         <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10 shrink-0">
           <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Phase</div>
-          <div className="flex flex-wrap gap-1">
+          <div className="flex gap-1 overflow-x-auto">
             {phaseOptions.map((p) => {
               const active = selectedPhaseId === p.id
               return (
                 <button
                   key={p.id}
                   type="button"
+                  title={p.name}
                   onClick={() => setSelectedPhaseId(p.id)}
-                  className={`px-2 py-1 text-[11px] font-medium rounded transition ${active ? 'bg-violet-600 text-white' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'}`}
+                  className={`px-2.5 py-1 text-[11px] font-medium rounded transition whitespace-nowrap shrink-0 ${active ? 'bg-violet-600 text-white' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'}`}
                 >
-                  {p.name}
+                  {p.short || p.name}
                 </button>
               )
             })}

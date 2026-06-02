@@ -2,6 +2,17 @@
 
 All notable changes to the QC Checklist workspace tool.
 
+## [0.2.2] — 2026-06-02
+
+### Fixed / Changed — UX mode AI Review
+- **Phase selector 1 dòng**: dùng nhãn ngắn (`PHASE_SHORT_NAMES`: Storytelling/Camera/Material/
+  Render/Post) + `whitespace-nowrap` + scroll ngang → không còn vỡ 2 dòng (full name ở tooltip).
+- **Đổi phase → xoá findings cũ**: thêm `useEffect` trong `AIPrecheckPanel` reset
+  result/error/meta khi `phaseId` đổi → phase chưa chạy hiển thị **trống** (không còn giữ
+  findings của phase trước). Áp dụng cho cả Self-QC pre-check (findings vốn theo từng phase).
+- **Ảnh chiếm tối đa**: giảm padding khung ảnh AI Review (`p-3`→`p-1.5`). Giữ `object-contain`
+  (full ảnh, không méo/không crop — đúng nhu cầu QC; letterbox 2 bên là do tỉ lệ ảnh).
+
 ## [0.2.1] — 2026-06-02
 
 ### Changed

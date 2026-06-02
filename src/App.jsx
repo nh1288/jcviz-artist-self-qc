@@ -1373,6 +1373,7 @@ export default function App() {
   const aiPhaseOptions = PHASES.map((p) => ({
     id: p.id,
     name: p.name,
+    short: PHASE_SHORT_NAMES[p.id] || p.name,
     checklist: getActiveItems(p.id, state.projectType).map((it) => it.title).filter(Boolean),
   }))
 

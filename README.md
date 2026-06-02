@@ -1,6 +1,6 @@
 # JCVIZ Artist Self-QC
 
-> **JCVIZ-AI workspace** — Class: **JCVIZ-WEB** · package `jcviz-artist-self-qc` · v0.0.1 · Status: Active
+> **JCVIZ-AI workspace** — Class: **JCVIZ-WEB** · package `jcviz-artist-self-qc` · v0.1.0 · Status: Active
 > Path: `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist` · Repo: `nh1288/jcviz-artist-self-qc` (Vercel auto-deploy từ `main`).
 > Doc set: [CLAUDE.md](CLAUDE.md) (Tool Card) · [CHANGELOG.md](CHANGELOG.md) · [VERSION.txt](VERSION.txt) · [DEPLOYMENT_NOTES.md](DEPLOYMENT_NOTES.md).
 
@@ -25,6 +25,7 @@ App chạy 100% trong trình duyệt — không có backend, không upload ảnh
 - **localStorage persistence** — toàn bộ checklist, notes, marks, lens scores, theme và project metadata lưu local; restore sau reload.
 - **Ready for Review logic** — nút chỉ active khi tất cả item ở trạng thái Đạt.
 - **Hướng dẫn nhanh** — onboarding card lúc chưa có ảnh + nút **Hướng dẫn** ở top bar mở help panel chi tiết.
+- **AI pre-check (beta · LAN)** — tuỳ chọn gọi vision LLM qua **gateway LAN nội bộ** để nhận xét ảnh theo phase (findings + severity + summary) và **một-chạm tạo mark từ finding**. Mặc định **TẮT**, ảnh chỉ gửi khi artist chủ động bấm (không cloud, không lưu); cần cấu hình gateway URL + API key. Chi tiết: [docs/LLM_QC_INTEGRATION.md](docs/LLM_QC_INTEGRATION.md).
 
 ## Tech stack
 

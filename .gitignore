@@ -4,3 +4,6 @@ dist-ssr
 .DS_Store
 .vite
 *.log
+SESSION.md
+.claude/
+docs/skills-reference/

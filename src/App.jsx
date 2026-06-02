@@ -1428,6 +1428,11 @@ export default function App() {
           <div className="min-w-0 min-h-0">
             <ImageReviewHelper
               phase={activePhase}
+              aiContext={{
+                phaseId: activePhase.id,
+                projectType: state.projectType,
+                checklist: activeItemsList.map((it) => it.title).filter(Boolean),
+              }}
               marking={{
                 types: MARK_TYPES,
                 mode: markMode,

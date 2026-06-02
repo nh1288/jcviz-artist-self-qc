@@ -1,8 +1,8 @@
-Tool: QC Checklist (JCVIZ Artist Self-QC) — package name: jcviz-artist-self-qc
-Class: JCVIZ-WEB
-Version: 0.0.1
+0.1.0
 Status: Active
 
+Tool: QC Checklist (JCVIZ Artist Self-QC) — package name: jcviz-artist-self-qc
+Class: JCVIZ-WEB
 Path: D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist
 Repo: https://github.com/nh1288/jcviz-artist-self-qc  (branch: main)
 Deploy: Vercel auto-deploy from GitHub main (pure-static Vite SPA).

@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+  loadAiConfig, saveAiConfig, encodeImageForAi, runPrecheck,
+  mapAreaToMarkType, SEVERITY_ORDER, DEFAULT_MODEL,
+} from './aiPrecheck.js'
 
 const GUIDE_PREFS_KEY = 'jcviz-self-qc-guides-v1'
 const PHI = 1.6180339887498949
@@ -60,7 +64,7 @@ function loadGuidePrefs() {
 
 const clamp01to100 = (v) => Math.max(0, Math.min(100, v))
 
-export default function ImageReviewHelper({ phase, marking }) {
+export default function ImageReviewHelper({ phase, marking, aiContext }) {
   const [imageUrl, setImageUrl] = useState(null)
   const [imageDims, setImageDims] = useState(null)
   const [activeGuides, setActiveGuides] = useState(loadGuidePrefs)
@@ -295,6 +299,14 @@ export default function ImageReviewHelper({ phase, marking }) {
           Xóa tất cả
         </button>
       </div>
+
+      {/* AI pre-check panel (additive — gọi vision LLM qua gateway LAN) */}
+      <AIPrecheckPanel
+        imageUrl={imageUrl}
+        aiContext={aiContext}
+        onAddMark={marking.onAdd}
+        markTypes={marking.types}
+      />
 
       {/* Body */}
       {!imageUrl ? (
@@ -568,5 +580,241 @@ function CompositionShapes({ dims, activeIds }) {
         />
       )}
     </g>
+  )
+}
+
+const SEVERITY_STYLE = {
+  high: 'bg-rose-500/15 text-rose-700 border-rose-500/30 dark:text-rose-300',
+  medium: 'bg-amber-500/15 text-amber-700 border-amber-500/30 dark:text-amber-300',
+  low: 'bg-slate-500/15 text-slate-600 border-slate-400/30 dark:text-slate-300',
+}
+const SEVERITY_LABEL = { high: 'Cao', medium: 'Vừa', low: 'Thấp' }
+
+const aiInputCls =
+  'w-full px-2 py-1 text-[11px] rounded border border-slate-200 bg-white placeholder:text-slate-400 ' +
+  'dark:border-white/10 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 ' +
+  'focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white/30'
+
+// AI pre-check: gọi vision LLM qua gateway LAN, hiện findings, cho phép tạo mark từ finding.
+// Additive — không đụng checklist/marks/lens. Ảnh chỉ rời browser khi artist chủ động bấm.
+function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes }) {
+  const [open, setOpen] = useState(false)
+  const [showConfig, setShowConfig] = useState(false)
+  const [config, setConfig] = useState(loadAiConfig)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [result, setResult] = useState(null)
+  const [meta, setMeta] = useState(null)
+  const [addedIdx, setAddedIdx] = useState(() => new Set())
+
+  const configured = Boolean(config.gatewayUrl.trim() && config.apiKey.trim())
+  // Cần ảnh để chạy; KHÔNG chặn khi chưa cấu hình — runPrecheck sẽ trả lỗi thân thiện
+  // ("chưa cấu hình URL/key") để artist thấy phản hồi thay vì nút chết.
+  const canRun = Boolean(imageUrl) && !loading
+
+  const handleSaveConfig = () => {
+    saveAiConfig(config)
+    setConfig(loadAiConfig())
+    setShowConfig(false)
+  }
+
+  const handleRun = async () => {
+    if (!imageUrl) return
+    setLoading(true)
+    setError(null)
+    setResult(null)
+    setMeta(null)
+    setAddedIdx(new Set())
+    try {
+      const base64 = await encodeImageForAi(imageUrl)
+      const res = await runPrecheck({
+        gatewayUrl: config.gatewayUrl,
+        apiKey: config.apiKey,
+        model: config.model,
+        base64,
+        phase: aiContext?.phaseId,
+        projectType: aiContext?.projectType,
+        checklist: aiContext?.checklist,
+      })
+      if (res.ok) {
+        setResult(res.data)
+        setMeta(res.meta)
+      } else {
+        setError(res.error)
+      }
+    } catch (e) {
+      setError(e?.message || 'Lỗi không xác định khi xử lý ảnh.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleAddMark = (finding, idx) => {
+    const mapped = mapAreaToMarkType(finding.area)
+    const typeId = markTypes?.some((t) => t.id === mapped) ? mapped : 'fix'
+    // Model không trả toạ độ → đặt mark mặc định, lệch nhẹ theo idx để không chồng khít.
+    const x = Math.min(70, 32 + (idx % 3) * 10)
+    const y = Math.min(70, 26 + (Math.floor(idx / 3) % 3) * 12)
+    const note = `[AI] ${finding.title || ''}${finding.suggestion ? ' — ' + finding.suggestion : ''}`.trim()
+    onAddMark({ type: typeId, xPercent: x, yPercent: y, widthPercent: 26, heightPercent: 20, note })
+    setAddedIdx((prev) => new Set(prev).add(idx))
+  }
+
+  const sortedFindings = result
+    ? result.findings
+        .map((f, i) => ({ f, i }))
+        .sort((a, b) => (SEVERITY_ORDER[a.f.severity] ?? 9) - (SEVERITY_ORDER[b.f.severity] ?? 9))
+    : []
+
+  return (
+    <div className="border-b border-slate-200 dark:border-white/10 shrink-0">
+      <div className="flex items-center justify-between gap-2 px-3 py-1.5">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+          AI pre-check
+          <span className="text-[9px] font-normal normal-case text-slate-400">(beta · LAN)</span>
+        </button>
+        <div className="flex items-center gap-2">
+          {!configured && (
+            <span className="text-[10px] text-amber-600 dark:text-amber-400">chưa cấu hình</span>
+          )}
+          <button
+            type="button"
+            onClick={() => { setOpen(true); setShowConfig((s) => !s) }}
+            className="text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition"
+          >
+            Cấu hình
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            className="text-[11px] text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition"
+          >
+            {open ? 'Ẩn' : 'Mở'}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="px-3 pb-2.5 space-y-2">
+          {showConfig && (
+            <div className="space-y-1.5 p-2 rounded bg-slate-50 border border-slate-200 dark:bg-white/5 dark:border-white/10">
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Gateway URL</label>
+              <input
+                type="text"
+                value={config.gatewayUrl}
+                onChange={(e) => setConfig((c) => ({ ...c, gatewayUrl: e.target.value }))}
+                placeholder="http://192.168.x.x:8765"
+                className={aiInputCls}
+              />
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">API key</label>
+              <input
+                type="password"
+                value={config.apiKey}
+                onChange={(e) => setConfig((c) => ({ ...c, apiKey: e.target.value }))}
+                placeholder="sk-jcviz-..."
+                className={aiInputCls}
+              />
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Model</label>
+              <input
+                type="text"
+                value={config.model}
+                onChange={(e) => setConfig((c) => ({ ...c, model: e.target.value }))}
+                placeholder={DEFAULT_MODEL}
+                className={aiInputCls}
+              />
+              <p className="text-[10px] leading-snug text-slate-400 dark:text-slate-500">
+                Key lưu trong trình duyệt và hiển thị trong client — chỉ dùng cho gateway LAN nội bộ, đừng dùng key bí mật.
+              </p>
+              <button
+                type="button"
+                onClick={handleSaveConfig}
+                className="px-2.5 py-1 text-[11px] font-medium rounded bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 hover:opacity-90 transition"
+              >
+                Lưu cấu hình
+              </button>
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={handleRun}
+            disabled={!canRun}
+            title={!imageUrl ? 'Mở ảnh trước' : (!configured ? 'Cấu hình gateway trước' : '')}
+            className="w-full px-3 py-1.5 text-[11px] font-medium rounded bg-violet-600 text-white hover:bg-violet-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed dark:disabled:bg-white/10 dark:disabled:text-slate-500 transition"
+          >
+            {loading ? 'Đang phân tích…' : 'Chạy AI pre-check (gửi ảnh sang box LAN nội bộ)'}
+          </button>
+          <p className="text-[10px] leading-snug text-slate-400 dark:text-slate-500">
+            Ảnh sẽ rời trình duyệt sang box LAN nội bộ (không cloud, không lưu). Chỉ gửi khi bạn bấm nút trên.
+            Kết quả chỉ là gợi ý — bạn vẫn là người quyết cuối.
+          </p>
+
+          {error && (
+            <div className="p-2 rounded text-[11px] bg-rose-50 border border-rose-200 text-rose-700 dark:bg-rose-500/10 dark:border-rose-500/30 dark:text-rose-300">
+              {error}
+            </div>
+          )}
+
+          {result && (
+            <div className="space-y-2 max-h-72 overflow-y-auto">
+              {result.summary && (
+                <div className="p-2 rounded bg-slate-50 border border-slate-200 text-[11px] leading-snug text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-slate-200">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-400">Nhận định</span>
+                    {result.ready_hint
+                      ? <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">AI gợi ý: ổn để review</span>
+                      : <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-700 dark:text-amber-300">AI gợi ý: còn điểm cần xem</span>}
+                  </div>
+                  {result.summary}
+                </div>
+              )}
+
+              {sortedFindings.length === 0 ? (
+                <p className="text-[11px] text-slate-400 dark:text-slate-500 text-center py-2">
+                  AI không nêu finding nào cho phase này.
+                </p>
+              ) : (
+                sortedFindings.map(({ f, i }) => (
+                  <div key={i} className="p-2 rounded border border-slate-200 dark:border-white/10 space-y-1">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded border ${SEVERITY_STYLE[f.severity] || SEVERITY_STYLE.medium}`}>
+                        {SEVERITY_LABEL[f.severity] || f.severity}
+                      </span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 dark:bg-white/10 dark:text-slate-400">{f.area}</span>
+                      <span className="text-[11px] font-medium text-slate-800 dark:text-slate-100">{f.title}</span>
+                    </div>
+                    {f.observation && (
+                      <p className="text-[11px] leading-snug text-slate-600 dark:text-slate-300">{f.observation}</p>
+                    )}
+                    {f.suggestion && (
+                      <p className="text-[11px] leading-snug text-slate-500 dark:text-slate-400">→ {f.suggestion}</p>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleAddMark(f, i)}
+                      disabled={addedIdx.has(i)}
+                      className="px-2 py-0.5 text-[10px] font-medium rounded border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:text-emerald-600 disabled:border-emerald-200 disabled:hover:bg-transparent dark:border-white/15 dark:text-slate-300 dark:hover:bg-white/10 dark:disabled:text-emerald-400 transition"
+                    >
+                      {addedIdx.has(i) ? '✓ Đã tạo mark' : 'Tạo mark'}
+                    </button>
+                  </div>
+                ))
+              )}
+
+              {meta?.elapsedMs && (
+                <p className="text-[9px] text-slate-400 dark:text-slate-500 text-right">
+                  {meta.model} · {meta.elapsedMs}ms
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   )
 }

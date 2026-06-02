@@ -12,14 +12,19 @@ See `README.md` for full feature list and `DEPLOYMENT_NOTES.md` for deploy detai
 - **Path:** `D:\JCVIZ-AI\JCVIZ-WEB\qc-checklist`
 - **Purpose:** App nội bộ giúp artist JCVIZ tự QC still image (checklist theo phase, Senior
   Review Lens, visual marking + composition guides) trước khi gửi PM / Creative Director.
-- **Version:** 0.0.1
+- **Version:** 0.1.0
 
 ### Stack
 - **Vite 6** + **React 18** + **Tailwind CSS 4** (dark mode = class strategy).
-- **100% client-side** — KHÔNG backend, KHÔNG Firebase/Firestore/Storage, KHÔNG auth, KHÔNG
-  upload ảnh. Ảnh chỉ là object URL trong session (mất khi reload).
+- **100% client-side** — KHÔNG backend riêng, KHÔNG Firebase/Firestore/Storage, KHÔNG auth.
+  Ảnh chỉ là object URL trong session (mất khi reload).
+- **Ngoại lệ duy nhất — AI pre-check (v0.1.0, consent-gated):** khi artist CHỦ ĐỘNG bấm, ảnh
+  được gửi tới gateway **LAN nội bộ** (Smart Convert gateway, endpoint `/qc-analyze`, vision
+  model trên Ollama) — KHÔNG cloud, KHÔNG lưu. Mặc định TẮT, không bao giờ auto-gửi. QC vẫn
+  là client; KHÔNG tự dựng backend.
 - Entry: `index.html` → `src/main.jsx` → `src/App.jsx` (toàn bộ app + data PHASES/LENSES/
-  MARK_TYPES). Image helper: `src/CompositionHelper.jsx`.
+  MARK_TYPES). Image helper: `src/CompositionHelper.jsx`. AI pre-check: `src/aiPrecheck.js`
+  (logic) + panel trong `src/CompositionHelper.jsx`. Contract: `docs/LLM_QC_INTEGRATION.md`.
 
 ### Scope-lock
 - Work **only** inside `JCVIZ-WEB\qc-checklist`. Đọc phần còn lại của `D:\JCVIZ-AI` để lấy
@@ -30,6 +35,8 @@ See `README.md` for full feature list and `DEPLOYMENT_NOTES.md` for deploy detai
   - `jcviz-self-qc-v3` — checklist, notes, marks, lens scores, project metadata (`STORAGE_KEY`).
   - `jcviz-self-qc-theme-v1` — theme (`THEME_KEY`).
   - `jcviz-self-qc-guides-v1` — composition guide prefs (`GUIDE_PREFS_KEY`).
+  - `jcviz-self-qc-ai-v1` — AI pre-check config: gateway URL + API key + model (`AI_CONFIG_KEY`,
+    trong `src/aiPrecheck.js`). KHÔNG trộn vào `STORAGE_KEY` checklist.
 - Đổi code không xoá dữ liệu đã lưu — nhưng **cẩn thận khi đổi schema state**; nếu đổi shape,
   bump key version (`-v3` → `-v4`) hoặc migrate, đừng làm hỏng dữ liệu QC của artist.
 

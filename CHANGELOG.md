@@ -2,6 +2,13 @@
 
 All notable changes to the QC Checklist workspace tool.
 
+## [0.3.1] — 2026-06-02
+
+### Fixed
+- **Bỏ scrollbar con thừa ở AI Review**: khối findings không còn `max-h-72` khi ở mode prominent
+  (AI Review) → findings giãn tự nhiên, chỉ cuộn bằng khối ngoài (`aside`) khi thực sự hết màn
+  hình, thay vì ép cuộn trong hộp nhỏ dù bên dưới còn trống. Panel nhỏ Self-QC vẫn giữ cap.
+
 ## [0.3.0] — 2026-06-02
 
 ### Added

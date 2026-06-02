@@ -830,7 +830,7 @@ function AIPrecheckPanel({ imageUrl, aiContext, onAddMark, markTypes, prominent 
           )}
 
           {result && (
-            <div className="space-y-2 max-h-72 overflow-y-auto">
+            <div className={`space-y-2 ${prominent ? '' : 'max-h-72 overflow-y-auto'}`}>
               {result.summary && (
                 <div className="p-2 rounded bg-slate-50 border border-slate-200 text-[11px] leading-snug text-slate-700 dark:bg-white/5 dark:border-white/10 dark:text-slate-200">
                   <div className="flex items-center gap-2 mb-1">
